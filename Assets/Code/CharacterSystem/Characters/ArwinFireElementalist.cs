@@ -6,9 +6,15 @@ using System.Text;
 
 class ArwinFireElementalist : Character
 {
+    protected override void Start()
+    {
+        base.Start();
+        //Set position
+        gameObject.transform.Translate(new Vector2(20, 400), Space.World);
+
+    }
     protected override void Update()
     {
-        HatSkin.transform.Translate(0, 0.01f, 0);
-        //Debug.Log("Hola");
+        base.Update();
     }
 }

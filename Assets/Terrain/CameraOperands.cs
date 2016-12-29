@@ -6,17 +6,22 @@ using System.Linq;
 using System.Text;
 
 
-class CameraOperands
+class CameraOperands : MonoBehaviour
 {
-    public static Camera currentCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-    private static Vector2 lastPosition = new Vector2();
+    public Camera currentCamera;
+    private Vector2 lastPosition;
 
-    private static void refreshCameraPosition()
+    void Start()
+    {
+        currentCamera = GameObject.Find("CharacterSystem").GetComponent<CharacterSystem>().getMainCharacter().transform.Find("Main Camera").GetComponent<Camera>();
+        lastPosition = new Vector2();
+    }
+    private void refreshCameraPosition()
     {
         lastPosition = currentCamera.transform.position;
     }
 
-    public static bool hasMoved() {
+    public bool hasMoved() {
 
         if((Vector2)currentCamera.transform.position == lastPosition)
         {
@@ -30,7 +35,7 @@ class CameraOperands
     }
       
    
-    public static int[] computeCameraToListOfChunks()
+    public int[] computeCameraToListOfChunks()
     {
        float x = currentCamera.transform.position.x;
        float y = currentCamera.transform.position.y;

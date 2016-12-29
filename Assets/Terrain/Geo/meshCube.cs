@@ -31,7 +31,7 @@ public class meshCube {
     //public Vector2 positionRel = new Vector2(0,0);
     //private TexturePosition[] TCoords = new TexturePosition[6];
 
-   public static Mesh doCube(Vector2 relPosition,bool debug)
+   public static Mesh doCube(Vector2 relPosition)
     {
 
         // You can change that line to provide another MeshFilter
@@ -77,13 +77,7 @@ public class meshCube {
         Vector3 p6 = new Vector3(length * .5f +  relPosition.x, width * .5f +  relPosition.y, -height * .5f);
         Vector3 p7 = new Vector3(-length * .5f +  relPosition.x, width * .5f +  relPosition.y, -height * .5f);
 
-        if (debug)
-        {
-           
-            Debug.Log(p3.x + ":" + p3.y);
-            Debug.Log(p2.x + ":" + p2.y);
-        }
-
+        
         
         Vector3[] vertices = new Vector3[]
         {

@@ -52,7 +52,7 @@ public class TerrainSystem : MonoBehaviour
     }
     void Update()
     {
-        if (CameraOperands.hasMoved())
+        if (GameObject.Find("CharacterSystem").GetComponent<CharacterSystem>().getMainCharacter().transform.Find("Main Camera").GetComponent<CameraOperands>().hasMoved())
         {
             instantiateListOfChunks();
         }
@@ -62,7 +62,7 @@ public class TerrainSystem : MonoBehaviour
     {
         screenGenerated.Clear();
         ChunkOnScreen.Clear();
-        int[] aa = CameraOperands.computeCameraToListOfChunks();
+        int[] aa = GameObject.Find("CharacterSystem").GetComponent<CharacterSystem>().getMainCharacter().transform.Find("Main Camera").GetComponent<CameraOperands>().computeCameraToListOfChunks();
         //Debug.Log(" , " + aa[0]+ " , " + aa[1] + " , " + aa[2] + " , " + aa[3] + " , " + aa[4] + " , " + aa[5] + " , " + aa[6] + " , " + aa[7] + " , " + aa[8]);
         for(int i = 0; i < aa.Length;i++)
         {

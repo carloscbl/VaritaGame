@@ -206,10 +206,10 @@ public class Chunk
                 //aa = meshCube.doCube(new Vector2(worldPos.x + (col - TerrainSystem.multiplierFormX), worldPos.y + (row)));
                 if(counter < 3)
                 {
-                    aa = meshCube.doCube(new Vector2(worldPos.x + (col * TerrainSystem.multiplierFormX), worldPos.y + (row * TerrainSystem.multiplierFormY)), true);
+                    aa = meshCube.doCube(new Vector2(worldPos.x + (col * TerrainSystem.multiplierFormX), worldPos.y + (row * TerrainSystem.multiplierFormY)));
                 }else
                 {
-                    aa = meshCube.doCube(new Vector2(worldPos.x + (col * TerrainSystem.multiplierFormX), worldPos.y + (row * TerrainSystem.multiplierFormY)), false);
+                    aa = meshCube.doCube(new Vector2(worldPos.x + (col * TerrainSystem.multiplierFormX), worldPos.y + (row * TerrainSystem.multiplierFormY)));
                 }
                 combine.mesh = aa;
                 chunkCubes[i].geometry = aa;

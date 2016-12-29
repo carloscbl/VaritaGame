@@ -18,25 +18,43 @@ public class CharacterSystem : MonoBehaviour {
     //Añadirlo a la lista
     // Use this for initialization
     void Start () {
-
+/*
         test = Instantiate(Resources.Load("CharacterBase")) as GameObject;
         
         test.AddComponent<Character>().mainPlayer = true;
         test.name = "TestPlayerBase";
         currentCharactersActivesList.Add(test.GetComponent<Character>());
         mainCharacter = test;
+        */
         
         
-        GameObject Arwin = Instantiate(Resources.Load("CharacterBase")) as GameObject;
-        Arwin.AddComponent<ArwinFireElementalist>();
-        Arwin.name = "Arwin";
-        currentCharactersActivesList.Add((Character)Arwin.GetComponent<ArwinFireElementalist>());
         
     
     }
     public void instantiateNewPlayer(string name)
     {
+        GameObject newPlayer = Instantiate(Resources.Load("CharacterBase")) as GameObject;
 
+        if (name == "Arwin")
+        {
+            newPlayer.AddComponent<ArwinFireElementalist>();
+            newPlayer.name = "Arwin";
+        }
+        else if(name == "Test")
+        {
+            newPlayer.AddComponent<Character>();
+            newPlayer.name = "Test";
+        }else
+        {
+            Debug.Assert(false, "There is not a Character with that name");
+        }
+        
+        currentCharactersActivesList.Add(newPlayer.GetComponent<Character>());
+        if (mainCharacter == null)
+        {
+            newPlayer.GetComponent<Character>().mainPlayer = true;
+            mainCharacter = newPlayer;
+        }
     }
     public List<Character> getCharacterList()
     {
@@ -48,21 +66,7 @@ public class CharacterSystem : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-        // test.rotatePlayer();
-        if (Input.mousePosition.x < Screen.width / 2)
-        {
-            //Negative X
-            test.GetComponent<Character>().body_main.transform.eulerAngles = new Vector3(0, 180, 0);
-            test.GetComponent<Character>().WeaponRight.GetComponent<SpriteRenderer>().flipY = true;
-            test.GetComponent<Character>().ArmRight.GetComponent<SpriteRenderer>().flipY = true;
-        }
-        else
-        {
-            //Positive X
-            test.GetComponent<Character>().body_main.transform.eulerAngles = new Vector3(0, 0, 0);
-            test.GetComponent<Character>().WeaponRight.GetComponent<SpriteRenderer>().flipY = false;
-            test.GetComponent<Character>().ArmRight.GetComponent<SpriteRenderer>().flipY = false;
-        }
+       
         
     }
 }
