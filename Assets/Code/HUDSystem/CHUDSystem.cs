@@ -37,13 +37,7 @@ class CHUDSystem : MonoBehaviour
 
     void Update()
     {
-        batten = ExitButton.GetComponent<Button>();
-
-        ColorBlock cb = batten.colors;
-
-        cb.normalColor = Color.green;
-
-        batten.colors = cb;
+        
     }
 
     public void requestToShowHUD(GameObject HUDObject)

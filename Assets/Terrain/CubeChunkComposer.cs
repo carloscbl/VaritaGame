@@ -9,7 +9,8 @@ class CubeChunkComposer : MonoBehaviour
     public static void composeCubes(out List<cube> tempContainerList, out List<Material> MatList)
     {
         byte[] terrain;
-        FileIO.readFile("test", out terrain);
+
+        GameObject.Find("FileIO").GetComponent<FileIO>().readFile("test", out terrain);
         MatList = new List<Material>();
 
         tempContainerList = new List<cube>();

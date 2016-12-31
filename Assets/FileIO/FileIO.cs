@@ -9,10 +9,15 @@ using System.IO;
 
 class FileIO : MonoBehaviour
 {
-   static string chuckFileSTD = "chunkData.ck";
-    public static string gameLevelFolder = Application.dataPath + "/levels/";
+    string chuckFileSTD;
+    public string gameLevelFolder;
     
-
+    void Start()
+    {
+        chuckFileSTD = "chunkData.ck";
+        gameLevelFolder = Application.dataPath + "/levels/";
+        writeChunkData("test");
+    }
     public void createFolder(string folderName)
     {
        if(!Directory.Exists(gameLevelFolder + folderName))
@@ -79,7 +84,7 @@ class FileIO : MonoBehaviour
         Debug.Log("Generado Terreno a fichero");
     }
 
-    public static void readFile(string actualLevel, out byte[] letters)
+    public void readFile(string actualLevel, out byte[] letters)
     {
         
         //byte[] letters;
@@ -97,7 +102,7 @@ class FileIO : MonoBehaviour
        // return letters;
     }
     //The last "/" between the file and the path shouldn't be used
-    public static void doBackupFile(bool delete, string actualLevel = "0")
+    public void doBackupFile(bool delete, string actualLevel = "0")
     {
         if(actualLevel == "0")
         {
@@ -134,27 +139,6 @@ class FileIO : MonoBehaviour
             //Do the new bck
         }
         
-    }
-    void Start()
-    {
-        //createFolder("level1");
-        //createFolder("level2");
-        writeChunkData("test");
-        //readFile();
-        //doBackupFile(false, "test");
-        //StartCoroutine(writeChunkData("test"));
-
-        /* byte[] terrain; 
-         readFile("test",out terrain);
-
-         if(terrain.Length == 5460000)
-         {
-             Debug.LogWarning("True 5,460,000 blocks allocated, " + terrain.Length.ToString());
-         }else Debug.LogWarning(terrain.Length);
-         */
-        //Debug.LogWarning("dONE");
-        //CubeChunkComposer.composeCube();
-        //CubeChunkComposer.composeChunks();
     }
 }
 

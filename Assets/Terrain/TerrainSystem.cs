@@ -12,8 +12,8 @@ public class TerrainSystem : MonoBehaviour
     private uint tileCount = 0;
     public static List<Chunk> chunks;
     public static List<Material> MaterialsList;
-    public readonly static float multiplierFormX = 0.25f;
-    public readonly static float multiplierFormY = 0.25f;
+    public readonly static float multiplierFormX = 0.35f;
+    public readonly static float multiplierFormY = 0.35f;
     bool aa = false;
     List<cube> tempContainerList;
     List<int> ChunkOnScreen = new List<int>();
