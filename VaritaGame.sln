@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaritaGame.Plugins", "VaritaGame.Plugins.csproj", "{CABAD6CC-6504-66D9-7ED4-DB96CB907E48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaritaGame", "VaritaGame.csproj", "{B568B4F2-B746-AFAB-A5A9-67043C3342B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaritaGame.Editor", "VaritaGame.Editor.csproj", "{EDBE9389-738D-FD45-8F0B-CBBE09E41323}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CABAD6CC-6504-66D9-7ED4-DB96CB907E48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CABAD6CC-6504-66D9-7ED4-DB96CB907E48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CABAD6CC-6504-66D9-7ED4-DB96CB907E48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CABAD6CC-6504-66D9-7ED4-DB96CB907E48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B568B4F2-B746-AFAB-A5A9-67043C3342B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B568B4F2-B746-AFAB-A5A9-67043C3342B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B568B4F2-B746-AFAB-A5A9-67043C3342B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B568B4F2-B746-AFAB-A5A9-67043C3342B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDBE9389-738D-FD45-8F0B-CBBE09E41323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDBE9389-738D-FD45-8F0B-CBBE09E41323}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDBE9389-738D-FD45-8F0B-CBBE09E41323}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDBE9389-738D-FD45-8F0B-CBBE09E41323}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
