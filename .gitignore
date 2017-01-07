@@ -1,2 +1,7 @@
 /*/metadata/*
 /*/ShaderCache/*
+.vs/
+Library/
+Temp/
+*.csproj
+*.sln
