@@ -10,8 +10,8 @@ public class Character : MonoBehaviour
     // Update is called once per frame
 
     string playerName;
-    int hp;
-    int mana;
+    ushort hp;
+    ushort mana;
 
     bool alive;
     bool spawned;
