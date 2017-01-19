@@ -158,7 +158,6 @@ GameObject:
   - component: {fileID: 114000013711048668}
   - component: {fileID: 114000013206683736}
   - component: {fileID: 114000013772721986}
-  - component: {fileID: 114000012661899402}
   - component: {fileID: 114000010938048552}
   m_Layer: 8
   m_Name: Main Camera
@@ -692,18 +691,6 @@ MonoBehaviour:
   useDepthTexture: 1
   sunShaftsShader: {fileID: 0}
   simpleClearShader: {fileID: 0}
---- !u!114 &114000012661899402
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013104747824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e70fa891b4ceb6a4ca16b1963adff39a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentCamera: {fileID: 0}
 --- !u!114 &114000012963751494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -905,18 +892,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d2a8f1a6bf5e642adddd1f97e867c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  maxSpeed: 6
-  jumpPower: 5
-  trueSpeed: 0
-  control: 0
-  canDoubleJump: 0
-  justJumped: 0
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 4294967039
-  GroundCheck: {fileID: 4000010691036108}
-  GroundDirection: {x: 0, y: -1, z: 0}
+  mJumpImpulse: 250
+  fsecondsDelayTeleport: 0.5
 --- !u!114 &114000013672913566
 MonoBehaviour:
   m_ObjectHideFlags: 1

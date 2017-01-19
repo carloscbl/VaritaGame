@@ -46,12 +46,12 @@ public class meshCube {
         mesh.Clear();
 
         
-        float length = TerrainSystem.multiplierFormX;
-        float width = TerrainSystem.multiplierFormX;
-        float height = TerrainSystem.multiplierFormX;
+        float length = TerrainSystem.sizeCubesX;
+        float width = TerrainSystem.sizeCubesX;
+        float height = TerrainSystem.sizeCubesX;
 
-        relPosition.x += TerrainSystem.multiplierFormX * .5f;
-        relPosition.y += TerrainSystem.multiplierFormY * .5f;
+        relPosition.x += TerrainSystem.sizeCubesX * .5f;
+        relPosition.y += TerrainSystem.sizeCubesY * .5f;
         //relPosition.x = TerrainSystem.multiplierFormX;
         //relPosition.y = TerrainSystem.multiplierFormY;
 

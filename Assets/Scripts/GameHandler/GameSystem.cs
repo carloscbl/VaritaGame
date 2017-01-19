@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 
 
 class GameSystem : MonoBehaviour
@@ -15,6 +10,8 @@ class GameSystem : MonoBehaviour
 
     public GameObject TerrainSystem;
     public GameObject CharacterSystem;
+    public GameObject MouseActions;
+    public GameObject Camera;//TODO: temporary
     private GameStatus gameStatus = GameStatus.StartMenu;
 
     public void requestEnableGameObject(GameObject go)
@@ -37,6 +34,8 @@ class GameSystem : MonoBehaviour
         gameStatus = GameStatus.Running;
         CharacterSystem.GetComponent<CharacterSystem>().instantiateNewPlayer(nameCharacter);
         TerrainSystem.SetActive(true);
+        MouseActions.SetActive(true);
+        Camera.SetActive(false);
     }
 
     public void PauseGame()
