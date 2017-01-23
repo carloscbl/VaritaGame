@@ -15,11 +15,18 @@ class GameSystem : MonoBehaviour
 
     public GameObject TerrainSystem;
     public GameObject CharacterSystem;
+    public GameObject ProjectileSystem;
     private GameStatus gameStatus = GameStatus.StartMenu;
+
+    private void Start()
+    {
+        initializeProjectileSystem();
+        print("holaGamesistem");
+    }
 
     public void requestEnableGameObject(GameObject go)
     {
-        print("Dentro del request");
+        //print("Dentro del request");
         go.SetActive(true);
     }
     public GameStatus getGameStatus()
@@ -47,6 +54,12 @@ class GameSystem : MonoBehaviour
     public void ResumeGame()
     {
 
+    }
+    public void initializeProjectileSystem()
+    {
+        ProjectileSystem = new GameObject("ProjectileSystem");
+        ProjectileSystem.AddComponent<ProjectileSystem>();
+        ProjectileSystem.transform.SetParent(this.transform);
     }
 }
 
