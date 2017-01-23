@@ -1,0 +1,484 @@
+fileFormatVersion: 2
+guid: df04a4d007c686c4ebf7822b14a35354
+timeCreated: 1484934723
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: ArwinDB_tex_0
+    21300002: ArwinDB_tex_1
+    21300004: ArwinDB_tex_2
+    21300006: ArwinDB_tex_3
+    21300008: ArwinDB_tex_4
+    21300010: ArwinDB_tex_5
+    21300012: ArwinDB_tex_6
+    21300014: ArwinDB_tex_7
+    21300016: ArwinDB_tex_8
+    21300018: ArwinDB_tex_9
+    21300020: ArwinDB_tex_10
+    21300022: ArwinDB_tex_11
+    21300024: ArwinDB_tex_12
+    21300026: ArwinDB_tex_13
+    21300028: ArwinDB_tex_14
+    21300030: ArwinDB_tex_15
+    21300032: ArwinDB_tex_16
+    21300034: ArwinDB_tex_17
+    21300036: ArwinDB_tex_18
+    21300038: ArwinDB_tex_19
+    21300040: ArwinDB_tex_20
+    21300042: ArwinDB_tex_21
+    21300044: ArwinDB_tex_22
+    21300046: ArwinDB_tex_23
+    21300048: ArwinDB_tex_24
+    21300050: ArwinDB_tex_25
+    21300052: ArwinDB_tex_26
+    21300054: ArwinDB_tex_27
+    21300056: ArwinDB_tex_28
+    21300058: ArwinDB_tex_29
+    21300060: ArwinDB_tex_30
+    21300062: ArwinDB_tex_31
+    21300064: ArwinDB_tex_32
+    21300066: ArwinDB_tex_33
+    21300068: ArwinDB_tex_34
+    21300070: ArwinDB_tex_35
+    21300072: ArwinDB_tex_36
+    21300074: ArwinDB_tex_37
+    21300076: ArwinDB_tex_38
+    21300078: ArwinDB_tex_39
+    21300080: ArwinDB_tex_40
+    21300082: ArwinDB_tex_41
+    21300084: ArwinDB_tex_42
+    21300086: ArwinDB_tex_43
+    21300088: ArwinDB_tex_44
+    21300090: ArwinDB_tex_45
+    21300092: ArwinDB_tex_46
+    21300094: ArwinDB_tex_47
+    21300096: ArwinDB_tex_48
+    21300098: ArwinDB_tex_49
+    21300100: ArwinDB_tex_50
+    21300102: ArwinDB_tex_51
+    21300104: ArwinDB_tex_52
+    21300106: ArwinDB_tex_53
+    21300108: ArwinDB_tex_54
+    21300110: ArwinDB_tex_55
+    21300112: ArwinDB_tex_56
+    21300114: ArwinDB_tex_57
+    21300116: ArwinDB_tex_58
+    21300118: ArwinDB_tex_59
+    21300120: ArwinDB_tex_60
+    21300122: ArwinDB_tex_61
+    21300124: ArwinDB_tex_62
+    21300126: ArwinDB_tex_63
+    21300128: ArwinDB_tex_64
+    21300130: ArwinDB_tex_65
+    21300132: ArwinDB_tex_66
+    21300134: ArwinDB_tex_67
+    21300136: ArwinDB_tex_68
+    21300138: ArwinDB_tex_69
+    21300140: ArwinDB_tex_70
+    21300142: ArwinDB_tex_71
+    21300144: ArwinDB_tex_72
+    21300146: ArwinDB_tex_73
+    21300148: ArwinDB_tex_74
+    21300150: ArwinDB_tex_75
+    21300152: ArwinDB_tex_76
+    21300154: ArwinDB_tex_77
+    21300156: ArwinDB_tex_78
+    21300158: ArwinDB_tex_79
+    21300160: ArwinDB_tex_80
+    21300162: ArwinDB_tex_81
+    21300164: ArwinDB_tex_82
+    21300166: ArwinDB_tex_83
+    21300168: ArwinDB_tex_84
+    21300170: ArwinDB_tex_85
+    21300172: ArwinDB_tex_86
+    21300174: ArwinDB_tex_87
+    21300176: ArwinDB_tex_88
+    21300178: ArwinDB_tex_89
+    21300180: ArwinDB_tex_90
+    21300182: ArwinDB_tex_91
+    21300184: ArwinDB_tex_92
+    21300186: ArwinDB_tex_93
+    21300188: ArwinDB_tex_94
+    21300190: ArwinDB_tex_95
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ArwinDB_tex_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 605.3334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_1
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 605.3334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_2
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 605.3334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_3
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 605.3334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_4
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 605.3334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_5
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 605.3334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_6
+      rect:
+        serializedVersion: 2
+        x: 1476
+        y: 605.3334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_7
+      rect:
+        serializedVersion: 2
+        x: 1722
+        y: 605.3334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 303.33334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_9
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 303.33334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_10
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 303.33334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_11
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 303.33334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_12
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 303.33334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_13
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 303.33334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_14
+      rect:
+        serializedVersion: 2
+        x: 1476
+        y: 303.33334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_15
+      rect:
+        serializedVersion: 2
+        x: 1722
+        y: 303.33334
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1.3333435
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_17
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 1.3333435
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_18
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 1.3333435
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_19
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 1.3333435
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_20
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 1.3333435
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_21
+      rect:
+        serializedVersion: 2
+        x: 1230
+        y: 1.3333435
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_22
+      rect:
+        serializedVersion: 2
+        x: 1476
+        y: 1.3333435
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ArwinDB_tex_23
+      rect:
+        serializedVersion: 2
+        x: 1722
+        y: 1.3333435
+        width: 246.625
+        height: 302.66666
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
