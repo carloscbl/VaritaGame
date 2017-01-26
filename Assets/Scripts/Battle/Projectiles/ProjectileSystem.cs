@@ -14,6 +14,11 @@ class ProjectileSystem : MonoBehaviour
     {
         //instantiate the pool;
         instantiatePoolOfProjectiles();
+
+        
+        projectilesList[19].GetComponent<Projectile>().setProperties(new Vector2(1,1),new Vector2(60,20),1,25,5,0,0,180,Projectile.ProjectileBehaviour.mouseControlled);
+        projectilesList[19].SetActive(true);
+
     }
 
     private void instantiatePoolOfProjectiles()
@@ -21,9 +26,16 @@ class ProjectileSystem : MonoBehaviour
         projectilesList = new List<GameObject>();
         for (int i = 0; i < MaxProjectilesPoolSize; i++)
         {
-            projectilesList.Add(GameObject.Instantiate((Resources.Load("Projectiles/ProjectileBase")) as GameObject,this.transform));
+            GameObject temp = GameObject.Instantiate((Resources.Load("Projectiles/ProjectileBase")) as GameObject, this.transform);
+            temp.name = i.ToString();
+            projectilesList.Add(temp);
             freeProjectilesList = new List<GameObject>(projectilesList);
         }
     } 
+
+    public void reportAsFree(GameObject projectile)
+    {
+
+    }
 }
 
