@@ -6,6 +6,7 @@ using System.Text;
 
 class ArwinFireElementalist : Character
 {
+    public readonly Faction MyFaction = Faction.Player;
     protected override void Start()
     {
         base.Start();

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System;
 
 public class Character : MonoBehaviour
 {
@@ -18,6 +19,22 @@ public class Character : MonoBehaviour
     bool visible;
     public bool mainPlayer;
     private List<Spell> spells;
+
+    [Flags]
+    public enum Faction : byte
+    {
+        Player = 1 << 0, //Player 
+        NPCAllies = 1 << 1,
+        NPCEnemys = 1 << 2,
+        WildLife = 1 << 3,
+
+        //Maybe player have a healer hability but this can only heal you allies but not you, then we use faction NPCAllies,
+        //when we check the spellcast, if is player or enemy !NPCAllies, so we do not heal
+        PlayerPlusAllies = Player | NPCAllies, // For example if someone of this faction shoot, then none of him faction would be damaged
+        EnemysPlusWildLife = NPCEnemys | WildLife,
+        PlayerPlusEnemysPlusWildLife = Player | NPCEnemys | WildLife
+
+    }
 
     Skin skin;
     //Skeleton skeleton;
