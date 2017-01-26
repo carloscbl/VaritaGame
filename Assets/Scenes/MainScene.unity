@@ -508,6 +508,53 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1001 &168902229
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1651747614}
+    m_Modifications:
+    - target: {fileID: 4432581318007104, guid: faf1493fcd204ac4288d0079c5fc938f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432581318007104, guid: faf1493fcd204ac4288d0079c5fc938f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432581318007104, guid: faf1493fcd204ac4288d0079c5fc938f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432581318007104, guid: faf1493fcd204ac4288d0079c5fc938f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432581318007104, guid: faf1493fcd204ac4288d0079c5fc938f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432581318007104, guid: faf1493fcd204ac4288d0079c5fc938f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432581318007104, guid: faf1493fcd204ac4288d0079c5fc938f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432581318007104, guid: faf1493fcd204ac4288d0079c5fc938f, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: faf1493fcd204ac4288d0079c5fc938f, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &168902230 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4432581318007104, guid: faf1493fcd204ac4288d0079c5fc938f,
+    type: 2}
+  m_PrefabInternal: {fileID: 168902229}
 --- !u!1 &202624665
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,6 +940,7 @@ GameObject:
   - component: {fileID: 387083138}
   - component: {fileID: 387083137}
   - component: {fileID: 387083136}
+  - component: {fileID: 387083139}
   m_Layer: 8
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -963,6 +1011,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 387083134}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &387083139
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 387083134}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &444122639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1847,11 +1910,11 @@ GameObject:
   - component: {fileID: 911650897}
   m_Layer: 8
   m_Name: CharacterBase
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &911650897
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3167,7 +3230,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1298398466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3855,6 +3918,7 @@ Transform:
   - {fileID: 2019999269}
   - {fileID: 1298398467}
   - {fileID: 444122642}
+  - {fileID: 168902230}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3871,6 +3935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TerrainSystem: {fileID: 1739637356}
   CharacterSystem: {fileID: 1671540221}
+  ProjectileSystem: {fileID: 0}
 --- !u!1 &1671540221
 GameObject:
   m_ObjectHideFlags: 0
@@ -3898,7 +3963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1738d3e58e45fa498f6c1036ac39c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCharacter: {fileID: 0}
+  mainCharacter: {fileID: 911650896}
 --- !u!4 &1671540223
 Transform:
   m_ObjectHideFlags: 0
@@ -5722,7 +5787,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2112843580
 MonoBehaviour:
   m_ObjectHideFlags: 0
