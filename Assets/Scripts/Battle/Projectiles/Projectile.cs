@@ -11,6 +11,8 @@ class Projectile : MonoBehaviour
     {
         linear, exponential, rotatory, mouseControlled
     }
+    private Character.Faction AffectedByThisProjectile;
+    private GameObject owner;
     private Vector2 OriginPos = new Vector2(0, 0); 
     private Vector2 TargetPos = new Vector2(0, 0);
     private float Size = 1;
@@ -25,6 +27,8 @@ class Projectile : MonoBehaviour
     private void OnEnable()
     {
         counter = 0;
+        currentLerpTime = 0;
+
     }
     private void OnDisable()
     {
@@ -32,8 +36,8 @@ class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        print("Colision");
-        print(other.gameObject.name);
+        //print("Colision");
+        //print(other.gameObject.name);
         if (other.gameObject.tag == "Player")
         {
 
@@ -41,11 +45,11 @@ class Projectile : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        print(collision.gameObject.name);
+        //print(collision.gameObject.name);
     }
     private void OnTriggerStay(Collider other)
     {
-        print("TrigerStay" + other.gameObject.name);
+        //print("TrigerStay" + other.gameObject.name);
     }
     private void InitializeProperties()
     {
@@ -79,18 +83,19 @@ class Projectile : MonoBehaviour
             }
             else if(Behaviour == ProjectileBehaviour.linear)
             {
-                this.GetComponent<BoxCollider>().transform.Translate((TargetPos - OriginPos) * 0.01f);
-            }else if(Behaviour == ProjectileBehaviour.exponential)
+                linearBehaviour();
+            }
+            else if(Behaviour == ProjectileBehaviour.exponential)
             {
                 exponentialBehaviour();
             }
         }
-        aa = this.gameObject.GetComponent<Collider>().
-
     }
 
-    public void setProperties(Vector2 Origin,Vector2 target,float size,float Damage,float Velocity, uint Pierceability, float AreaAttachedRadious, float LifeTime, ProjectileBehaviour behaviour)
+    public void setProperties(GameObject owner,Character.Faction AffectedByThisProjectile, Vector2 Origin,Vector2 target,float size,float Damage,float Velocity, uint Pierceability, float AreaAttachedRadious, float LifeTime, ProjectileBehaviour behaviour)
     {
+        this.owner = owner;
+        this.AffectedByThisProjectile = AffectedByThisProjectile;
         this.OriginPos = Origin;
         this.TargetPos = target;
         this.Size = size;
@@ -114,16 +119,50 @@ class Projectile : MonoBehaviour
         gameObject.transform.eulerAngles = new Vector3(0, 0, Mathf.MoveTowardsAngle(transform.eulerAngles.z, target.z, 5));
         transform.position = Vector2.MoveTowards(transform.position, mousePosition, 0.1f);
     }
+
+    float lerpTime = 3f;
+    float currentLerpTime;
+    private void linearBehaviour()
+    {
+        currentLerpTime += Time.deltaTime;
+        if (currentLerpTime > lerpTime)
+        {
+            currentLerpTime = lerpTime;
+        }
+        float t = currentLerpTime / lerpTime;
+        this.transform.position = Vector3.Lerp(OriginPos,TargetPos,t);
+        Debug.DrawLine(OriginPos, TargetPos, Color.red);
+        if (counter == 0)
+        {
+            
+            transform.Rotate(Vector3.forward, Mathf.Atan2(((TargetPos - OriginPos).y), ((TargetPos - OriginPos).x)) * Mathf.Rad2Deg, Space.World);
+            counter += 1;
+        }
+    }
+   
     private void exponentialBehaviour()
     {
         //Debug.DrawLine(OriginPos, TargetPos, Color.red);
-        this.transform.Translate((TargetPos - OriginPos).normalized * Velocity *0.01f,Space.World);
-        if(counter == 0)
+        currentLerpTime += Time.deltaTime;
+        if (currentLerpTime > lerpTime)
+        {
+            currentLerpTime = lerpTime;
+        }
+        float t = currentLerpTime / lerpTime;
+
+        //S , smootherStep
+        //t = t * t * t * (t * (6f * t - 15f) + 10f);
+
+        //Exponential
+        t = t * t;
+       
+        transform.position = new Vector3(Mathf.SmoothStep(OriginPos.x,TargetPos.x,t), Mathf.SmoothStep(OriginPos.y, TargetPos.y, t), 0);
+        if (counter == 0)
         {
             transform.Rotate(Vector3.forward, Mathf.Atan2(((TargetPos - OriginPos).y), ((TargetPos - OriginPos).x)) * Mathf.Rad2Deg, Space.World);
             counter += 1;
         }
-        
+
     }
 
 

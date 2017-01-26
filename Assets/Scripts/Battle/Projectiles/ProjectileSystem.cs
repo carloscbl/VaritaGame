@@ -15,9 +15,17 @@ class ProjectileSystem : MonoBehaviour
         //instantiate the pool;
         instantiatePoolOfProjectiles();
 
-        
-        projectilesList[19].GetComponent<Projectile>().setProperties(new Vector2(1,1),new Vector2(60,20),1,25,5,0,0,180,Projectile.ProjectileBehaviour.mouseControlled);
-        projectilesList[19].SetActive(true);
+        GameObject mainplayer = GameObject.Find("CharacterSystem").GetComponent<CharacterSystem>().getMainCharacter();
+
+        float tiempo = Time.realtimeSinceStartup;
+        for (int i = 0; i < 5; i++)
+        {
+            projectilesList[i].GetComponent<Projectile>().setProperties(mainplayer, Character.Faction.EnemysPlusWildLife,
+            new Vector2(1, 1), new Vector2(20, 5 + (1* i)), 1, 25, 5, 0, 0, 180, Projectile.ProjectileBehaviour.linear);
+            projectilesList[i].SetActive(true);
+        }
+        float tiempoFinal = Time.realtimeSinceStartup;
+        print(tiempoFinal - tiempo);
 
     }
 
