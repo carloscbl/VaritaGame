@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using System.Collections;
 
-class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     public enum ProjectileBehaviour
     {
@@ -33,6 +33,8 @@ class Projectile : MonoBehaviour
     private void OnDisable()
     {
         StatsWereSet = false;
+        //Register as free
+        transform.GetComponentInParent<ProjectileSystem>().registerAsFree(this.gameObject);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -92,7 +94,7 @@ class Projectile : MonoBehaviour
         }
     }
 
-    public void setProperties(GameObject owner,Character.Faction AffectedByThisProjectile, Vector2 Origin,Vector2 target,float size,float Damage,float Velocity, uint Pierceability, float AreaAttachedRadious, float LifeTime, ProjectileBehaviour behaviour)
+    public void setProperties(GameObject owner,Character.Faction FactionAffectedByThisProjectile, Vector2 Origin,Vector2 target,float size,float Damage,float Velocity, uint Pierceability, float AreaAttachedRadious, float LifeTime, ProjectileBehaviour behaviour)
     {
         this.owner = owner;
         this.AffectedByThisProjectile = AffectedByThisProjectile;
@@ -165,6 +167,7 @@ class Projectile : MonoBehaviour
 
     }
 
+   
 
 }
 
