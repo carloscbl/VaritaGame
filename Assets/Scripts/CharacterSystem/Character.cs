@@ -38,6 +38,7 @@ public class Character : MonoBehaviour
 
     Skin skin;
     //Skeleton skeleton;
+    public ProjectileSystem projectileSystem;
 
     Rigidbody myRigidbody;
     Collider myCollider;
@@ -60,32 +61,13 @@ public class Character : MonoBehaviour
 
     public GameObject ShoesSkin;
     public GameObject myCamera;
-
-    protected virtual void Update()
-    {
-        // test.rotatePlayer();
-        if (Input.mousePosition.x < Screen.width / 2)
-        {
-            //Negative X
-            body_main.transform.eulerAngles = new Vector3(0, 180, 0);
-            WeaponRight.GetComponent<SpriteRenderer>().flipY = true;
-            ArmRight.GetComponent<SpriteRenderer>().flipY = true;
-        }
-        else
-        {
-            //Positive X
-            body_main.transform.eulerAngles = new Vector3(0, 0, 0);
-            WeaponRight.GetComponent<SpriteRenderer>().flipY = false;
-            ArmRight.GetComponent<SpriteRenderer>().flipY = false;
-        }
-    }
-
     protected virtual void Start()
     {
         spawned = false;
         visible = false;
         alive = false;
 
+       
         spells = new List<Spell>();
         spells.Add(new Spell("Fire1", 100, 0));
         spells.Add(new Spell("Fire2", 100, 0));
@@ -130,7 +112,32 @@ public class Character : MonoBehaviour
         hierarchy.Add(ArmLeftSkin);
 
         HatSkin.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Art/Textures/Player/Skin/Hat_Explorer");
+        //Remove
+        
     }
+    protected virtual void Update()
+    {
+        
+        // test.rotatePlayer();
+        if (Input.mousePosition.x < Screen.width / 2)
+        {
+            //Negative X
+            body_main.transform.eulerAngles = new Vector3(0, 180, 0);
+            WeaponRight.GetComponent<SpriteRenderer>().flipY = true;
+            ArmRight.GetComponent<SpriteRenderer>().flipY = true;
+        }
+        else
+        {
+            //Positive X
+            body_main.transform.eulerAngles = new Vector3(0, 0, 0);
+            WeaponRight.GetComponent<SpriteRenderer>().flipY = false;
+            ArmRight.GetComponent<SpriteRenderer>().flipY = false;
+        }
+       
+
+    }
+
+  
     private void generateSkin()
     {
 

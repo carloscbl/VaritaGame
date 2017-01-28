@@ -18,19 +18,20 @@ public class CharacterSystem : MonoBehaviour {
 	//Añadirlo a la lista
 	// Use this for initialization
 	void Start () {
-/*
-		test = Instantiate(Resources.Load("CharacterBase")) as GameObject;
-		
-		test.AddComponent<Character>().mainPlayer = true;
-		test.name = "TestPlayerBase";
-		currentCharactersActivesList.Add(test.GetComponent<Character>());
-		mainCharacter = test;
-		*/
-		
-		
-		
-	
-	}
+        /*
+                test = Instantiate(Resources.Load("CharacterBase")) as GameObject;
+
+                test.AddComponent<Character>().mainPlayer = true;
+                test.name = "TestPlayerBase";
+                currentCharactersActivesList.Add(test.GetComponent<Character>());
+                mainCharacter = test;
+                */
+
+        //mainCharacter = GameObject.Find("CharacterBase");
+        instantiateNewPlayer("Arwin");
+
+
+    }
 	public void instantiateNewPlayer(string name)
 	{
 		GameObject newPlayer = Instantiate(Resources.Load("CharacterBase")) as GameObject;
