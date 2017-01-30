@@ -11,7 +11,7 @@ public class Character : MonoBehaviour
     // Update is called once per frame
 
     string playerName;
-    ushort hp;
+    protected uint hp;
     ushort mana;
 
     bool alive;
@@ -35,7 +35,8 @@ public class Character : MonoBehaviour
         PlayerPlusEnemysPlusWildLife = Player | NPCEnemys | WildLife
 
     }
-
+    //Returns the real damage
+    public virtual uint hurtMe(uint dmg){ return hp -= dmg;  }
     Skin skin;
     //Skeleton skeleton;
     public ProjectileSystem projectileSystem;
@@ -53,7 +54,7 @@ public class Character : MonoBehaviour
     public GameObject ArmRight;
     public GameObject WeaponRight;
     public GameObject ArmRightSkin;
-
+    public Faction MyFaction;
     public GameObject HatSkin;
     public GameObject ArmLeft;
     public GameObject WeaponLeft;

@@ -29,6 +29,7 @@ public class CharacterSystem : MonoBehaviour {
 
         //mainCharacter = GameObject.Find("CharacterBase");
         instantiateNewPlayer("Arwin");
+        instantiateNewPlayer("Dummy");
 
 
     }
@@ -36,16 +37,21 @@ public class CharacterSystem : MonoBehaviour {
 	{
 		GameObject newPlayer = Instantiate(Resources.Load("CharacterBase")) as GameObject;
 
-		if (name == "Arwin")
-		{
-			newPlayer.AddComponent<ArwinFireElementalist>();
-			newPlayer.name = "Arwin";
-		}
-		else if(name == "Test")
-		{
-			newPlayer.AddComponent<Character>();
-			newPlayer.name = "Test";
-		}else
+        if (name == "Arwin")
+        {
+            newPlayer.AddComponent<ArwinFireElementalist>();
+            newPlayer.name = "Arwin";
+        }
+        else if (name == "Test")
+        {
+            newPlayer.AddComponent<Character>();
+            newPlayer.name = "Test";
+        }else if (name == "Dummy")
+        {
+            newPlayer.AddComponent<Dummy>();
+            newPlayer.name = "Dummy";
+        }
+        else
 		{
 			Debug.Assert(false, "There is not a Character with that name");
 		}
