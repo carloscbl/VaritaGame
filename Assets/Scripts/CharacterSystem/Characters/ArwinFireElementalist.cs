@@ -11,21 +11,22 @@ class ArwinFireElementalist : Character
     {
         base.Start();
         //Set position
-        gameObject.transform.Translate(new Vector2(20, 400), Space.World);
+        gameObject.transform.Translate(new Vector2(0, 2), Space.World);
         projectileSystem = GameObject.Find("ProjectileSystem").GetComponent<ProjectileSystem>();
 
         data = new ProjectileSystem.ProjectileData();
         data.owner = this.gameObject;
         data.factionAffectedByThisProjectile = Faction.EnemysPlusWildLife;
-        data.OriginPosition = this.ArmRight.transform.position;
+        data.KindOfProjectile = Projectile.KindOfProjectile.FireOrb;
+        data.OriginPosition = Vector3.zero;
         data.TargetPosition = Vector3.zero;
-        data.size = 1f;
+        data.size = 0.75f;
         data.damage = 25;
-        data.Velocity = 3;
+        data.Velocity = 18;
         data.Pierceability = 0;
         data.AreaAttachedRadious = 0;
-        data.LifeTime = 3;
-        data.behaviour = Projectile.ProjectileBehaviour.linear;
+        data.LifeTime = 4;
+        data.behaviour = Projectile.ProjectileBehaviour.exponential;
 
     }
 
@@ -35,10 +36,21 @@ class ArwinFireElementalist : Character
         base.Update();
         if (Input.GetMouseButtonDown(0))
         {
-            data.OriginPosition = this.ArmRight.transform.position;
+            data.KindOfProjectile = Projectile.KindOfProjectile.FireOrb;
+            data.behaviour = Projectile.ProjectileBehaviour.exponential;
+            data.size = 0.75f;
+            data.OriginPosition = this.WeaponRight.transform.position;
             data.TargetPosition = InputUtils.getMousePosition();
             ProjectileSystem.thisSystem.ShootProjectile(data);
             //projectileSystem.ShootProjectile(data);
+        }else if (Input.GetMouseButtonDown(1))
+        {
+            data.KindOfProjectile = Projectile.KindOfProjectile.Bullet;
+            data.size = 1;
+            data.behaviour = Projectile.ProjectileBehaviour.linear;
+            data.OriginPosition = this.WeaponRight.transform.position;
+            data.TargetPosition = InputUtils.getMousePosition();
+            ProjectileSystem.thisSystem.ShootProjectile(data);
         }
 
     }
