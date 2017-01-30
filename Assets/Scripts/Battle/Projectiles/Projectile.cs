@@ -11,6 +11,10 @@ public class Projectile : MonoBehaviour
     {
         linear, exponential, rotatory, mouseControlled
     }
+    public enum KindOfProjectile
+    {
+        Bullet,FireOrb,EnergyOrb,FireBullet
+    }
     private Character.Faction AffectedByThisProjectile;
     private GameObject owner;
     private Vector2 OriginPos = new Vector2(0, 0); 
@@ -23,9 +27,16 @@ public class Projectile : MonoBehaviour
     private float LifeTime = 0;
     private bool StatsWereSet = false;
     private ProjectileBehaviour Behaviour;
+    private KindOfProjectile kindOfPrefab;
+    public bool shouldStop = false;
+    private float forcedDestructionTime = 10;
+    private Vector2 Direction;
     
     private void OnEnable()
     {
+        this.GetComponent<SpriteRenderer>().color = Color.white;
+        forcedDestructionTime = 10;
+        shouldStop = false;
         counter = 0;
         currentLerpTime = 0;
 
@@ -35,14 +46,26 @@ public class Projectile : MonoBehaviour
         StatsWereSet = false;
         //Register as free
         transform.GetComponentInParent<ProjectileSystem>().registerAsFree(this.gameObject);
+        counter = 0;
+    }
+    public void DestroyAnimationEnd()
+    {
+        this.gameObject.SetActive(false);
+    }
+    public void ProceedToEndProjectile()
+    {
+        this.gameObject.GetComponent<Animator>().SetBool("destroy", true);
     }
     private void OnTriggerEnter(Collider other)
     {
         //print("Colision");
         //print(other.gameObject.name);
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Projectiles")
         {
-
+            if(Pierceability == 0)
+            {
+                shouldStop = true;
+            }
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -56,9 +79,27 @@ public class Projectile : MonoBehaviour
     private void InitializeProperties()
     {
         this.transform.position = OriginPos;
+        
+        switch (kindOfPrefab)
+        {
+            case KindOfProjectile.Bullet:
+                this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Art/Textures/Projectiles/testProjectile");
+                this.GetComponent<Animator>().enabled = false;
+                transform.localScale = new Vector3(1, 1, 0.25f);
+                break;
+            case KindOfProjectile.FireOrb:
+                this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Art/Textures/Projectiles/Animations/FireOrb_traveler/_0000_FireOrb_travel1");
+                this.GetComponent<Animator>().enabled = true;
+                transform.localScale = new Vector3(1, 1, 0.25f);
+                break;
+            case KindOfProjectile.EnergyOrb:
+                break;
+            case KindOfProjectile.FireBullet:
+                break;
+            default:
+                break;
+        }
         this.transform.localScale *= this.Size;
-        this.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Art/Textures/Projectiles/Materials/testProjectile");
-
         StatsWereSet = true;
     }
 
@@ -74,30 +115,44 @@ public class Projectile : MonoBehaviour
             LifeTime -= Time.deltaTime;
             //Here we check LifeTime and movement
 
-            if(LifeTime <= 0)
+            if(LifeTime <= 0 || shouldStop == true)
             {
-                this.gameObject.SetActive(false);
-            }
+                ProceedToEndProjectile();
 
-            if(Behaviour == ProjectileBehaviour.mouseControlled)
-            {
-                mouseControlledBehaviour();
             }
-            else if(Behaviour == ProjectileBehaviour.linear)
+            if (shouldStop)
             {
-                linearBehaviour();
+                forcedDestructionTime -= Time.deltaTime;
+                if(forcedDestructionTime < 0)
+                {
+                    DestroyAnimationEnd();
+                }
+                return;
             }
-            else if(Behaviour == ProjectileBehaviour.exponential)
+            switch (Behaviour)
             {
-                exponentialBehaviour();
+                case ProjectileBehaviour.linear:
+                    linearBehaviour();
+                    break;
+                case ProjectileBehaviour.exponential:
+                    exponentialBehaviour();
+                    break;
+                case ProjectileBehaviour.rotatory:
+                    break;
+                case ProjectileBehaviour.mouseControlled:
+                    mouseControlledBehaviour();
+                    break;
             }
+           
         }
     }
 
-    public void setProperties(GameObject owner,Character.Faction FactionAffectedByThisProjectile, Vector2 Origin,Vector2 target,float size,float Damage,float Velocity, uint Pierceability, float AreaAttachedRadious, float LifeTime, ProjectileBehaviour behaviour)
+    public void setProperties(GameObject owner,Character.Faction FactionAffectedByThisProjectile,Projectile.KindOfProjectile KindOfProjectile,
+        Vector2 Origin,Vector2 target,float size,float Damage,float Velocity, uint Pierceability, float AreaAttachedRadious, float LifeTime, ProjectileBehaviour behaviour)
     {
         this.owner = owner;
-        this.AffectedByThisProjectile = AffectedByThisProjectile;
+        this.AffectedByThisProjectile = FactionAffectedByThisProjectile;
+        this.kindOfPrefab = KindOfProjectile;
         this.OriginPos = Origin;
         this.TargetPos = target;
         this.Size = size;
@@ -107,6 +162,22 @@ public class Projectile : MonoBehaviour
         this.AreaAttachedRadious = AreaAttachedRadious;
         this.LifeTime = LifeTime;
         this.Behaviour = behaviour;
+        lerpTime = LifeTime;
+
+       /* //Conversion
+        Vector2 direction = TargetPos - OriginPos;     
+        float magnitude = TargetPos.magnitude - OriginPos.magnitude;/*
+        if (Mathf.Abs( magnitude) < 19)
+        {
+            direction.x *= Mathf.Abs((((direction.x / 20)/1) *  Mathf.Sign(direction.x) * 20) - 20);
+            direction.y *= Mathf.Abs((((direction.y / 20)/1) *  Mathf.Sign(direction.y) * 20) - 20);
+            this.Direction = new Vector2(direction.x, direction.y);     
+            Vector2 NewLocalTarget = new Vector2(direction.x + OriginPos.x, direction.y + OriginPos.y);  
+            TargetPos = NewLocalTarget;
+            //print(TargetPos); 
+        }
+        */
+        //Init
         InitializeProperties();
     }
 
@@ -122,7 +193,7 @@ public class Projectile : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, mousePosition, 0.1f);
     }
 
-    float lerpTime = 3f;
+    float lerpTime = 2f;
     float currentLerpTime;
     private void linearBehaviour()
     {
@@ -132,12 +203,18 @@ public class Projectile : MonoBehaviour
             currentLerpTime = lerpTime;
         }
         float t = currentLerpTime / lerpTime;
-        this.transform.position = Vector3.Lerp(OriginPos,TargetPos,t);
-        Debug.DrawLine(OriginPos, TargetPos, Color.red);
+        float radians = Mathf.Atan2(((TargetPos - OriginPos).y), ((TargetPos - OriginPos).x));
+        float x = Mathf.Cos(radians) * Velocity;
+        float y = Mathf.Sin(radians) * Velocity;
+        Direction = new Vector2(x, y);
+       
+        this.transform.position = Vector3.Lerp(OriginPos, Direction + OriginPos, t);
+        //Debug.DrawLine(OriginPos, TargetPos, Color.red);
         if (counter == 0)
         {
             
-            transform.Rotate(Vector3.forward, Mathf.Atan2(((TargetPos - OriginPos).y), ((TargetPos - OriginPos).x)) * Mathf.Rad2Deg, Space.World);
+           // transform.Rotate(Vector3.forward, Mathf.Atan2(((TargetPos - OriginPos).y), ((TargetPos - OriginPos).x)) * Mathf.Rad2Deg, Space.World);
+            transform.eulerAngles = new Vector3(0,0, Mathf.Atan2(((TargetPos - OriginPos).y), ((TargetPos - OriginPos).x)) * Mathf.Rad2Deg);
             counter += 1;
         }
     }
@@ -157,11 +234,18 @@ public class Projectile : MonoBehaviour
 
         //Exponential
         t = t * t;
-       
-        transform.position = new Vector3(Mathf.SmoothStep(OriginPos.x,TargetPos.x,t), Mathf.SmoothStep(OriginPos.y, TargetPos.y, t), 0);
+
+        float radians = Mathf.Atan2(((TargetPos - OriginPos).y), ((TargetPos - OriginPos).x));
+        float x = Mathf.Cos(radians) * Velocity;
+        float y = Mathf.Sin(radians) * Velocity;
+        Direction = new Vector2(x, y);
+
+        this.transform.position = Vector3.Lerp(OriginPos, Direction + OriginPos, t);
+        //transform.position = new Vector3(Mathf.SmoothStep(OriginPos.x,TargetPos.x,t), Mathf.SmoothStep(OriginPos.y, TargetPos.y, t), 0);
         if (counter == 0)
         {
-            transform.Rotate(Vector3.forward, Mathf.Atan2(((TargetPos - OriginPos).y), ((TargetPos - OriginPos).x)) * Mathf.Rad2Deg, Space.World);
+            //transform.Rotate(Vector3.forward, Mathf.Atan2(((TargetPos - OriginPos).y), ((TargetPos - OriginPos).x)) * Mathf.Rad2Deg, Space.World);
+            transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(((TargetPos - OriginPos).y), ((TargetPos - OriginPos).x)) * Mathf.Rad2Deg);
             counter += 1;
         }
 

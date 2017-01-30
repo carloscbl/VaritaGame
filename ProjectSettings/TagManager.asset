@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Collider
+  - Projetile
+  - Projectiles
   layers:
   - Default
   - TransparentFX

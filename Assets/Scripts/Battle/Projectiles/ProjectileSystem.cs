@@ -7,34 +7,41 @@ using System.Collections;
 
 public class ProjectileSystem : MonoBehaviour
 {
-    private uint MaxProjectilesPoolSize = 128;
+    private readonly uint MaxProjectilesPoolSize = 24;
+    private uint timesResizedPool = 0;
     private List<GameObject> projectilesList;
     private List<GameObject> freeProjectilesList;
 
     public static ProjectileSystem thisSystem;
 
+    private void Awake()
+    {
+        thisSystem = this;
+    }
     private void Start()
     {
         //instantiate the pool;
         instantiatePoolOfProjectiles();
-
-        GameObject mainplayer = GameObject.Find("CharacterSystem").GetComponent<CharacterSystem>().getMainCharacter();
-
-        float tiempo = Time.realtimeSinceStartup;
-        for (int i = 0; i < 5; i++)
-        {
-            projectilesList[i].GetComponent<Projectile>().setProperties(mainplayer, Character.Faction.EnemysPlusWildLife,
-            new Vector2(1, 1), new Vector2(20, 5 + (1* i)), 1, 25, 5, 0, 0, 180, Projectile.ProjectileBehaviour.linear);
-            projectilesList[i].SetActive(true);
-            freeProjectilesList.Remove(projectilesList[i]);
-        }
-        float tiempoFinal = Time.realtimeSinceStartup;
-        print(tiempoFinal - tiempo);
-        thisSystem = this;
+        
     }
-
+    private void resizePoolAnother_24()
+    {
+        timesResizedPool += 1;
+        for (int i = 0; i < 24; i++)
+        {
+            GameObject temp = GameObject.Instantiate((Resources.Load("Projectiles/ProjectileBase")) as GameObject, this.transform);
+            temp.name = (projectilesList.Count + 1).ToString();
+            projectilesList.Add(temp);
+            freeProjectilesList.Add(temp);
+        }
+        
+    }
     private GameObject GetOneFreePooledProjectile()
     {
+        if(freeProjectilesList.Count == 0)
+        {
+            resizePoolAnother_24();
+        }
         GameObject temp = freeProjectilesList[0];
         freeProjectilesList.Remove(temp);
         return temp;
@@ -61,6 +68,7 @@ public class ProjectileSystem : MonoBehaviour
     {
         public GameObject                       owner;
         public Character.Faction                factionAffectedByThisProjectile;
+        public Projectile.KindOfProjectile      KindOfProjectile;
         public Vector2                          OriginPosition;
         public Vector2                          TargetPosition;
         public float                            damage;
@@ -78,6 +86,7 @@ public class ProjectileSystem : MonoBehaviour
         projectile.GetComponent<Projectile>().setProperties(
             data.owner,
             data.factionAffectedByThisProjectile,
+            data.KindOfProjectile,
             data.OriginPosition,
             data.TargetPosition,
             data.size,
