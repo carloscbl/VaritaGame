@@ -163,24 +163,15 @@ public class Projectile : MonoBehaviour
         this.LifeTime = LifeTime;
         this.Behaviour = behaviour;
         lerpTime = LifeTime;
-
-       /* //Conversion
-        Vector2 direction = TargetPos - OriginPos;     
-        float magnitude = TargetPos.magnitude - OriginPos.magnitude;/*
-        if (Mathf.Abs( magnitude) < 19)
-        {
-            direction.x *= Mathf.Abs((((direction.x / 20)/1) *  Mathf.Sign(direction.x) * 20) - 20);
-            direction.y *= Mathf.Abs((((direction.y / 20)/1) *  Mathf.Sign(direction.y) * 20) - 20);
-            this.Direction = new Vector2(direction.x, direction.y);     
-            Vector2 NewLocalTarget = new Vector2(direction.x + OriginPos.x, direction.y + OriginPos.y);  
-            TargetPos = NewLocalTarget;
-            //print(TargetPos); 
-        }
-        */
+        rotateTowardsTarget();
+       
         //Init
         InitializeProperties();
     }
-
+    private void rotateTowardsTarget()
+    {
+        transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(((TargetPos - OriginPos).y), ((TargetPos - OriginPos).x)) * Mathf.Rad2Deg);
+    }
     private void mouseControlledBehaviour()
     {
         camera = GameObject.Find("CharacterSystem").GetComponent<CharacterSystem>().mainCharacter.transform.Find("Main Camera").gameObject.GetComponent<Camera>();
@@ -209,14 +200,7 @@ public class Projectile : MonoBehaviour
         Direction = new Vector2(x, y);
        
         this.transform.position = Vector3.Lerp(OriginPos, Direction + OriginPos, t);
-        //Debug.DrawLine(OriginPos, TargetPos, Color.red);
-        if (counter == 0)
-        {
-            
-           // transform.Rotate(Vector3.forward, Mathf.Atan2(((TargetPos - OriginPos).y), ((TargetPos - OriginPos).x)) * Mathf.Rad2Deg, Space.World);
-            transform.eulerAngles = new Vector3(0,0, Mathf.Atan2(((TargetPos - OriginPos).y), ((TargetPos - OriginPos).x)) * Mathf.Rad2Deg);
-            counter += 1;
-        }
+        
     }
    
     private void exponentialBehaviour()
@@ -241,14 +225,7 @@ public class Projectile : MonoBehaviour
         Direction = new Vector2(x, y);
 
         this.transform.position = Vector3.Lerp(OriginPos, Direction + OriginPos, t);
-        //transform.position = new Vector3(Mathf.SmoothStep(OriginPos.x,TargetPos.x,t), Mathf.SmoothStep(OriginPos.y, TargetPos.y, t), 0);
-        if (counter == 0)
-        {
-            //transform.Rotate(Vector3.forward, Mathf.Atan2(((TargetPos - OriginPos).y), ((TargetPos - OriginPos).x)) * Mathf.Rad2Deg, Space.World);
-            transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(((TargetPos - OriginPos).y), ((TargetPos - OriginPos).x)) * Mathf.Rad2Deg);
-            counter += 1;
-        }
-
+        
     }
 
    
