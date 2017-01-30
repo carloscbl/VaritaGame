@@ -54,17 +54,23 @@ public class Projectile : MonoBehaviour
     }
     public void ProceedToEndProjectile()
     {
+        //This call a track animator that make it invoke DestryoAnimationEnd()
         this.gameObject.GetComponent<Animator>().SetBool("destroy", true);
     }
     private void OnTriggerEnter(Collider other)
     {
-        //print("Colision");
-        //print(other.gameObject.name);
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "Projectiles")
         {
+            if(other.tag == "Living" || other.tag == "Destructibles")
+            {
+                other.GetComponent<Character>().hurtMe((uint)this.Damage);
+            }
             if(Pierceability == 0)
             {
                 shouldStop = true;
+            }else
+            {
+                Pierceability -= 1;
             }
         }
     }
@@ -86,6 +92,7 @@ public class Projectile : MonoBehaviour
                 this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Art/Textures/Projectiles/testProjectile");
                 this.GetComponent<Animator>().enabled = false;
                 transform.localScale = new Vector3(1, 1, 0.25f);
+                this.GetComponent<BoxCollider>().size = new Vector3(1, 0.25f, 0.25f);
                 break;
             case KindOfProjectile.FireOrb:
                 this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Art/Textures/Projectiles/Animations/FireOrb_traveler/_0000_FireOrb_travel1");

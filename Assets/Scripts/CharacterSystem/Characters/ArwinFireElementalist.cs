@@ -6,14 +6,15 @@ using System.Text;
 
 class ArwinFireElementalist : Character
 {
-    public readonly Faction MyFaction = Faction.Player;
+    
     protected override void Start()
     {
         base.Start();
+        gameObject.AddComponent<PlayerMovController>();
         //Set position
         gameObject.transform.Translate(new Vector2(0, 2), Space.World);
         projectileSystem = GameObject.Find("ProjectileSystem").GetComponent<ProjectileSystem>();
-
+        MyFaction = Faction.Player;
         data = new ProjectileSystem.ProjectileData();
         data.owner = this.gameObject;
         data.factionAffectedByThisProjectile = Faction.EnemysPlusWildLife;
