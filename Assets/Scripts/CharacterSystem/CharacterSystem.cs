@@ -28,15 +28,29 @@ public class CharacterSystem : MonoBehaviour {
                 */
 
         //mainCharacter = GameObject.Find("CharacterBase");
-        instantiateNewPlayer("Arwin");
-        instantiateNewPlayer("Dummy");
-
+       instantiateNewPlayer("Arwin");
+        for (int i = 0; i < 5; i++)
+        {
+           //GameObject temp = instantiateNewPlayer("Dummy");
+            //temp.transform.position = new Vector2(i - (i*2)*2f, 2);
+        }
+        
 
     }
-	public void instantiateNewPlayer(string name)
+	public GameObject instantiateNewPlayer(string name)
 	{
 		GameObject newPlayer = Instantiate(Resources.Load("CharacterBase")) as GameObject;
-
+        /*
+        switch ()
+        {
+            case PlayerType.Std:
+                break;
+            case PlayerType.Elementalist:
+                break;
+            default:
+                break;
+        }
+        */
         if (name == "Arwin")
         {
             newPlayer.AddComponent<ArwinFireElementalist>();
@@ -62,14 +76,16 @@ public class CharacterSystem : MonoBehaviour {
 			newPlayer.GetComponent<Character>().mainPlayer = true;
 			mainCharacter = newPlayer;
 		}
+
+        return newPlayer;
 	}
 	public List<Character> getCharacterList()
 	{
 		return this.currentCharactersActivesList;
 	}
-	public GameObject getMainCharacter()
+	public  GameObject getMainCharacter()
 	{
-		return this.mainCharacter;
+		return mainCharacter;
 	}
 	// Update is called once per frame
 	void Update () {

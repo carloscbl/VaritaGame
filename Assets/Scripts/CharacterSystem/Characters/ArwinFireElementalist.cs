@@ -12,7 +12,7 @@ class ArwinFireElementalist : Character
         base.Start();
         gameObject.AddComponent<PlayerMovController>();
         //Set position
-        gameObject.transform.Translate(new Vector2(0, 2), Space.World);
+        gameObject.transform.Translate(new Vector2(5, 302), Space.World);
         projectileSystem = GameObject.Find("ProjectileSystem").GetComponent<ProjectileSystem>();
         MyFaction = Faction.Player;
         data = new ProjectileSystem.ProjectileData();
@@ -40,7 +40,8 @@ class ArwinFireElementalist : Character
             data.KindOfProjectile = Projectile.KindOfProjectile.FireOrb;
             data.behaviour = Projectile.ProjectileBehaviour.exponential;
             data.size = 0.75f;
-            data.OriginPosition = this.WeaponRight.transform.position;
+            data.Pierceability = 1;
+            data.OriginPosition = this.WeaponProjectileHelper.transform.position;
             data.TargetPosition = InputUtils.getMousePosition();
             ProjectileSystem.thisSystem.ShootProjectile(data);
             //projectileSystem.ShootProjectile(data);
@@ -49,7 +50,8 @@ class ArwinFireElementalist : Character
             data.KindOfProjectile = Projectile.KindOfProjectile.Bullet;
             data.size = 1;
             data.behaviour = Projectile.ProjectileBehaviour.linear;
-            data.OriginPosition = this.WeaponRight.transform.position;
+            data.Pierceability = 2;
+            data.OriginPosition = this.WeaponProjectileHelper.transform.position;
             data.TargetPosition = InputUtils.getMousePosition();
             ProjectileSystem.thisSystem.ShootProjectile(data);
         }

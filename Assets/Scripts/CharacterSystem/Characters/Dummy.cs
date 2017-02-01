@@ -13,6 +13,7 @@ class Dummy : Character
         tag = "Living";
         hp = 200;
         body_main.GetComponent<SpriteRenderer>().color = Color.red;
+        //this.transform.position = new Vector2(0, -5);
     }
     public override uint hurtMe(uint dmg) {
         print(dmg);

@@ -65,7 +65,7 @@ public class Projectile : MonoBehaviour
             {
                 other.GetComponent<Character>().hurtMe((uint)this.Damage);
             }
-            if(Pierceability == 0)
+            if(Pierceability <= 0)
             {
                 shouldStop = true;
             }else
@@ -98,6 +98,7 @@ public class Projectile : MonoBehaviour
                 this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Art/Textures/Projectiles/Animations/FireOrb_traveler/_0000_FireOrb_travel1");
                 this.GetComponent<Animator>().enabled = true;
                 transform.localScale = new Vector3(1, 1, 0.25f);
+                this.GetComponent<BoxCollider>().size = new Vector3(1, 1, 0.25f);
                 break;
             case KindOfProjectile.EnergyOrb:
                 break;
@@ -122,20 +123,17 @@ public class Projectile : MonoBehaviour
             LifeTime -= Time.deltaTime;
             //Here we check LifeTime and movement
 
-            if(LifeTime <= 0 || shouldStop == true)
+            if(LifeTime <= 0 || shouldStop)
             {
                 ProceedToEndProjectile();
-
-            }
-            if (shouldStop)
-            {
                 forcedDestructionTime -= Time.deltaTime;
-                if(forcedDestructionTime < 0)
+                if (forcedDestructionTime < 0)
                 {
                     DestroyAnimationEnd();
                 }
                 return;
             }
+            
             switch (Behaviour)
             {
                 case ProjectileBehaviour.linear:

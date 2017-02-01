@@ -25,11 +25,13 @@ public class MouseActions : MonoBehaviour {
 
 				if (Physics.Raycast(ray, out hit, 35f))
 				{
-					//Debug.LogWarning(hit.transform.gameObject.name);
-					Chunk tempChunk = ts.findChunk(hit.transform.gameObject.name);
-
-					tempChunk.updateMesh(hit.point);
-
+                    //Debug.LogWarning(hit.transform.gameObject.name);
+                    
+                        Chunk tempChunk = ts.findChunk(hit.transform.gameObject.name);
+                    if (tempChunk !=null)
+                    {
+                        tempChunk.updateMesh(hit.point);
+                    }
 				}
 			}
 		}
