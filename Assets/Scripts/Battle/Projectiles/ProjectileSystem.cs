@@ -24,6 +24,25 @@ public class ProjectileSystem : MonoBehaviour
         instantiatePoolOfProjectiles();
         
     }
+    float timer = 3;
+    private void Update()
+    {
+       /* if (timesResizedPool != 0)
+        {
+            timer -= Time.deltaTime;
+            if (freeProjectilesList.Count > 24 && timer <= 0)
+            {
+                timesResizedPool -= 1;
+                freeProjectilesList.RemoveRange(0, 24);
+            }else
+            {
+                timer = 3;
+            }
+        }else
+        {
+            timer = 3;
+        }*/
+    }
     private void resizePoolAnother_24()
     {
         timesResizedPool += 1;

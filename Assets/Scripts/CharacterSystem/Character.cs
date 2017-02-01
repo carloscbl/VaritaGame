@@ -53,6 +53,7 @@ public class Character : MonoBehaviour
     public GameObject LegsSkin;
     public GameObject ArmRight;
     public GameObject WeaponRight;
+    public GameObject WeaponProjectileHelper;
     public GameObject ArmRightSkin;
     public Faction MyFaction;
     public GameObject HatSkin;
@@ -97,6 +98,7 @@ public class Character : MonoBehaviour
         ShoesSkin = body_main.transform.Find("ShoesSkin").gameObject;
         //Arms
         WeaponRight = ArmRight.transform.Find("WeaponRight").gameObject;
+        WeaponProjectileHelper = WeaponRight.transform.Find("WeaponProjectileHelper").gameObject;
         ArmRightSkin = ArmRight.transform.Find("ArmRightSkin").gameObject;
         WeaponLeft = ArmLeft.transform.Find("WeaponLeft").gameObject;
         ArmLeftSkin = ArmLeft.transform.Find("ArmLeftSkin").gameObject;
