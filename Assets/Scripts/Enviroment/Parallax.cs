@@ -32,8 +32,7 @@ public class Parallax : MonoBehaviour {
         switch (Layer)
         {
             case ParallaxLayer.Background:
-                Vector3 tempPos = Player.GetComponent<Character>().myCamera.transform.position;
-                this.transform.position = new Vector3(tempPos.x, tempPos.y, 0.5f);
+                BackGround();
                 break;
             case ParallaxLayer.Middle:
                 Middle();
@@ -45,6 +44,12 @@ public class Parallax : MonoBehaviour {
                 break;
         }
     }
+    void BackGround()
+    {
+        Vector3 tempPos = Player.GetComponent<Character>().myCamera.transform.position;
+        this.transform.position = new Vector3(tempPos.x, tempPos.y, 0.5f);
+        
+    }
     public float closeY = 100;
     public float closeX = 100;
     public float middleY = 250;
@@ -53,7 +58,6 @@ public class Parallax : MonoBehaviour {
     {
         Translation(closeY, closeX,true);
     }
-
     void Translation(float maxY, float maxX ,bool Close)
     {
         if (count == 0)
@@ -68,10 +72,10 @@ public class Parallax : MonoBehaviour {
             lastY = Player.transform.position.y;
             lastX = Player.transform.position.x;
             //float interp = Mathf.Lerp(0, 50, );
-            this.GetComponent<Renderer>().material.SetTextureOffset("_MainTex", new Vector2(Mathf.Clamp(Player.transform.position.x, -250, 12000) / 64, 0 ));
+            this.GetComponent<Renderer>().material.SetTextureOffset("_MainTex", new Vector2(Mathf.Clamp(Player.transform.position.x, -250, 12000) / closeX, 0 ));
         }else
         {
-            this.transform.Translate(new Vector2((Player.transform.position.x - lastX) * maxX / 500, (Player.transform.position.y - lastY) * maxY / 500));
+            this.transform.Translate(new Vector2((Player.transform.position.x - lastX), (Player.transform.position.y - lastY) * maxY / 500));
             lastY = Player.transform.position.y;
             lastX = Player.transform.position.x;
         }
