@@ -33,6 +33,7 @@ class MeshComposer
                 positionsInChunk.Add(temp);
                 hashTable.Add(data[i], temp);
             }
+            //Probar que todo funciona correcto :) <-----
         }
     }
 
