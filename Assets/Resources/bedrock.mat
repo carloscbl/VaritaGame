@@ -93,7 +93,7 @@ Material:
       second: 0
     - first:
         name: _Metallic
-      second: 0.735
+      second: 0.295
     - first:
         name: _Mode
       second: 0

@@ -23,11 +23,13 @@ class TerrainGeneration : MonoBehaviour
             int stone = Noise(px, 0, 80, 15, 1);
             stone += Noise(px, 0, 50, 30, 1);
             stone += Noise(px, 0, 10, 10, 1);
-            stone += 75;
+            stone += 280 * 1000 / 400;
 
             int dirt = Noise(px, 0, 100f, 35, 1);
             dirt += Noise(px, 100, 50, 30, 1);
-            dirt += 75;
+            dirt += 300*1000/400;
+
+            
 
             for (int py = 0; py < blocks.GetLength(1); py++)
             {
@@ -41,21 +43,19 @@ class TerrainGeneration : MonoBehaviour
                         blocks[px, py] = 2;
 
                     }
-
                     //The next three lines remove dirt and rock to make caves in certain places
                     if (Noise(px, py * 2, 16, 14, 1) > 10)
                     { //Caves
-                        blocks[px, py] = 4;
+                        blocks[px, py] = 0;
 
                     }
+
 
                 }
                 else if (py < dirt)
                 {
                     blocks[px, py] = 2;
-                }
-
-
+                } 
             }
         }
         /*for(int i = 0;i< blocks.GetLength(0);i++)

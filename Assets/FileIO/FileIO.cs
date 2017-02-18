@@ -25,7 +25,7 @@ class FileIO : MonoBehaviour
             Directory.CreateDirectory(gameLevelFolder + folderName);
         }
     }
-    
+    public static byte[] blocksA;
 
     //void writeChunkData(string actualLevel,byte[]data)
     void writeChunkData(string actualLevel)
@@ -43,7 +43,7 @@ class FileIO : MonoBehaviour
 
         byte randomNumber = 0;
         //byte[520] numbers;
-        
+        /*
         bool air = false;
         for (int i = 0; i < chunkRow; i++)
         {
@@ -69,14 +69,15 @@ class FileIO : MonoBehaviour
                 }
             }
         }
-        /*
-        //TerrainGeneration TG = new TerrainGeneration();
-        byte [,] blocksA = TerrainGeneration.TrueGenTerrain();
-        foreach (var item in blocksA)
+        */
+        byte [,] blocksB = TerrainGeneration.TrueGenTerrain();
+        List<byte> list = new List<byte>();
+        foreach (var item in blocksB)
         {
+            list.Add(item);
             writer.Write(item);
         }
-        */
+        blocksA = list.ToArray();
        
         writer.Close();
         stream.Close();
@@ -86,19 +87,26 @@ class FileIO : MonoBehaviour
 
     public void readFile(string actualLevel, out byte[] letters)
     {
-        
-        //byte[] letters;
-        FileStream stream = new FileStream(gameLevelFolder + actualLevel + "/" + chuckFileSTD, FileMode.Open, FileAccess.Read);
-        BinaryReader reader = new BinaryReader(stream);
+        if(blocksA != null)
+        {
+            letters = blocksA;
+        }else
+        {
+            System.IO.StreamReader SR = new StreamReader(gameLevelFolder + actualLevel + "/" + chuckFileSTD);
+            //FileStream stream = new FileStream(gameLevelFolder + actualLevel + "/" + chuckFileSTD, FileMode.Open, FileAccess.Read);
+            BinaryReader reader = new BinaryReader(SR.BaseStream);
 
         letters = new byte[reader.BaseStream.Length];
-        for(long i =0; i< reader.BaseStream.Length; i++)
-        {
-            letters[i] = reader.ReadByte();
+            for (uint i = 0; i < reader.BaseStream.Length; i++)
+            {
+                letters[i] = reader.ReadByte();
+            }
+
+            reader.Close();
+            SR.Close();
         }
-       
-        reader.Close();
-        stream.Close();
+        //byte[] letters;
+        
        // return letters;
     }
     //The last "/" between the file and the path shouldn't be used

@@ -46,9 +46,13 @@ public class TerrainSystem : MonoBehaviour
     }
     void Start()
     {
-        
+        float time = Time.realtimeSinceStartup;
         CubeChunkComposer.composeCubes(out tempContainerList, out MaterialsList);
+        float timeNow = Time.realtimeSinceStartup - time;
+        print(timeNow);
         chunksStructs = CubeChunkComposer.composeChunks(tempContainerList);
+        timeNow = Time.realtimeSinceStartup - time;
+        print("General"+timeNow);
     }
     void Update()
     {

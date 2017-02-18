@@ -8,8 +8,9 @@ class CubeChunkComposer : MonoBehaviour
 {
     public static void composeCubes(out List<cube> tempContainerList, out List<Material> MatList)
     {
+        float time = Time.realtimeSinceStartup;
         byte[] terrain;
-
+        
         GameObject.Find("FileIO").GetComponent<FileIO>().readFile("test", out terrain);
         MatList = new List<Material>();
 
@@ -19,7 +20,9 @@ class CubeChunkComposer : MonoBehaviour
         uint totalCubesPerChunk = 520;
         uint totalCubes = (uint)terrain.Length;
         uint totalChunks = totalCubes / totalCubesPerChunk;
-
+        float newTime = Time.realtimeSinceStartup - time;
+        print("ReadFile: " + newTime);
+        time = Time.realtimeSinceStartup;
         //Materials
         Material air    = Resources.Load("air", typeof(Material)) as Material;
         MatList.Add(air);
@@ -38,7 +41,9 @@ class CubeChunkComposer : MonoBehaviour
 
         Material bedrock = Resources.Load("bedrock", typeof(Material)) as Material;
         MatList.Add(bedrock);
-
+        newTime = Time.realtimeSinceStartup - time;
+        print("Materiales: "+newTime);
+        time = Time.realtimeSinceStartup;
         //Actual chunk, total cubes less actual id and the result divided to maxcubes 
         for (int i = 0; i < terrain.Length; i++)
         {
@@ -74,8 +79,9 @@ class CubeChunkComposer : MonoBehaviour
           
             tempContainerList.Add(tempCube);
         }
-        
-        
+
+        newTime = Time.realtimeSinceStartup - time;
+        print("Bucle "+newTime);
     }
     public static List<ChunkData> composeChunks( List<cube> tempContainerList)
     {

@@ -31,7 +31,11 @@ public class Projectile : MonoBehaviour
     public bool shouldStop = false;
     private float forcedDestructionTime = 10;
     private Vector2 Direction;
-    
+    private Light Light;
+    private Vector2 currentMovementOfReleaser;
+    private bool destroyTerrain = true;
+
+
     private void OnEnable()
     {
         this.GetComponent<SpriteRenderer>().color = Color.white;
@@ -45,6 +49,7 @@ public class Projectile : MonoBehaviour
     {
         StatsWereSet = false;
         //Register as free
+        resetProjectile();
         transform.GetComponentInParent<ProjectileSystem>().registerAsFree(this.gameObject);
         counter = 0;
     }
@@ -73,19 +78,34 @@ public class Projectile : MonoBehaviour
                 Pierceability -= 1;
             }
         }
+
+        if (this.destroyTerrain)
+        {
+            print(other.gameObject.name);
+            TerrainSystem ts = GameObject.Find("Root").transform.Find("TerrainSystem").gameObject.GetComponent<TerrainSystem>();
+            Chunk tempChunk = ts.findChunk(other.gameObject.name);
+            if (tempChunk != null)
+            {
+                tempChunk.updateMesh(this.transform.position);
+            }
+        }
+    }
+    private void resetProjectile()
+    {
+        Light.enabled = false;
     }
     private void OnCollisionEnter(Collision collision)
     {
-        //print(collision.gameObject.name);
     }
     private void OnTriggerStay(Collider other)
     {
         //print("TrigerStay" + other.gameObject.name);
     }
-    private void InitializeProperties()
+    protected virtual void InitializeProperties()
     {
         this.transform.position = OriginPos;
-        
+        Light = GetComponent<Light>();
+        currentMovementOfReleaser = owner.GetComponent<Rigidbody>().velocity;
         switch (kindOfPrefab)
         {
             case KindOfProjectile.Bullet:
@@ -93,11 +113,19 @@ public class Projectile : MonoBehaviour
                 this.GetComponent<Animator>().enabled = false;
                 transform.localScale = new Vector3(1, 1, 0.25f);
                 this.GetComponent<BoxCollider>().size = new Vector3(1, 0.25f, 0.25f);
+                Light.enabled = false;
+
                 break;
             case KindOfProjectile.FireOrb:
                 this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Art/Textures/Projectiles/Animations/FireOrb_traveler/_0000_FireOrb_travel1");
                 this.GetComponent<Animator>().enabled = true;
                 transform.localScale = new Vector3(1, 1, 0.25f);
+                Light.enabled = true;
+                Light.renderMode = LightRenderMode.ForcePixel;
+                Light.shadows = LightShadows.Hard;
+                Light.range = 5;
+                Light.intensity = 8;
+                Light.enabled = true;
                 this.GetComponent<BoxCollider>().size = new Vector3(1, 1, 0.25f);
                 break;
             case KindOfProjectile.EnergyOrb:
@@ -148,10 +176,14 @@ public class Projectile : MonoBehaviour
                     mouseControlledBehaviour();
                     break;
             }
-           
+            destroyTerrainM();
         }
     }
 
+    private void destroyTerrainM()
+    {
+        
+    }
     public void setProperties(GameObject owner,Character.Faction FactionAffectedByThisProjectile,Projectile.KindOfProjectile KindOfProjectile,
         Vector2 Origin,Vector2 target,float size,float Damage,float Velocity, uint Pierceability, float AreaAttachedRadious, float LifeTime, ProjectileBehaviour behaviour)
     {
@@ -204,7 +236,7 @@ public class Projectile : MonoBehaviour
         float y = Mathf.Sin(radians) * Velocity;
         Direction = new Vector2(x, y);
        
-        this.transform.position = Vector3.Lerp(OriginPos, Direction + OriginPos, t);
+        this.transform.position = Vector3.Lerp(OriginPos, Direction + OriginPos + currentMovementOfReleaser, t);
         
     }
    
@@ -229,7 +261,7 @@ public class Projectile : MonoBehaviour
         float y = Mathf.Sin(radians) * Velocity;
         Direction = new Vector2(x, y);
 
-        this.transform.position = Vector3.Lerp(OriginPos, Direction + OriginPos, t);
+        this.transform.position = Vector3.Lerp(OriginPos, Direction + OriginPos + currentMovementOfReleaser, t);
         
     }
 
