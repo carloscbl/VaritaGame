@@ -216,7 +216,6 @@ public class meshCube {
         mesh.normals = normales;
         mesh.uv = uvs;
         mesh.triangles = triangles;
-        
 
         mesh.RecalculateBounds();
         ;

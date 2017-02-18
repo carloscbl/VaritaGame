@@ -11,12 +11,15 @@ class FileIO : MonoBehaviour
 {
     string chuckFileSTD;
     public string gameLevelFolder;
-    
-    void Start()
+    private void Awake()
     {
         chuckFileSTD = "chunkData.ck";
         gameLevelFolder = Application.dataPath + "/levels/";
         writeChunkData("test");
+    }
+    void Start()
+    {
+       
     }
     public void createFolder(string folderName)
     {
