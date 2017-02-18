@@ -23,6 +23,15 @@ class GameSystem : MonoBehaviour
         initializeProjectileSystem();
         print("holaGamesistem");
     }
+    byte firstFrame = 0;
+    private void Update()
+    {
+        if (firstFrame == 0)
+        {
+            transform.Find("TerrainSystem").gameObject.SetActive(true);
+            firstFrame = 1;
+        }
+    }
 
     public void requestEnableGameObject(GameObject go)
     {
