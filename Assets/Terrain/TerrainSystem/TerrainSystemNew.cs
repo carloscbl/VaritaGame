@@ -55,10 +55,20 @@ class TerrainSystemNew : MonoBehaviour
             }        
         }
     }
-
+    int i = 0;
     private void Update()
     {
         //We need chunks 0,1,501
+        if(i == 25)
+        {
+            float time = Time.realtimeSinceStartup;
+            GameObject temp = new GameObject(i.ToString());
+            temp.AddComponent<ChunkNew>().setParameters(Dispatcher(45), 45);
+            float newTime = Time.realtimeSinceStartup - time;
+            print(newTime);
+            
+        }
+        i += 1;
     }
 
     private byte[] Dispatcher(uint numOfChunk)
