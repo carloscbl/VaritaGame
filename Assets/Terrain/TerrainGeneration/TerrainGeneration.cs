@@ -55,7 +55,8 @@ class TerrainGeneration : MonoBehaviour
                 else if (py < dirt)
                 {
                     blocks[px, py] = 2;
-                } 
+                }
+                blocks[px, py] = 2;
             }
         }
         /*for(int i = 0;i< blocks.GetLength(0);i++)
