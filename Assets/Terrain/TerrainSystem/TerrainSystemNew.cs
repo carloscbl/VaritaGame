@@ -9,37 +9,48 @@ using System.Threading;
 
 class TerrainSystemNew : MonoBehaviour
 {
-    public static readonly uint heightCubes = 2730;
-    public static readonly uint widthCubes = 500;
-    public static readonly uint totalChunks = (heightCubes * widthCubes) / totalCubesInChunk; 
+    public static readonly uint widthCubes = 2730; 
+    public static readonly uint heightCubes = 500;
+    public static readonly uint chunkColl = 105;
+    public static readonly uint chunkRow = 25;
+    public static uint totalChunks;
     public static readonly ushort rowSize = 20;
     public static readonly ushort collSize = 26;
     public static readonly uint totalCubesInChunk = (uint)(rowSize * collSize);
-    public static readonly float cubeSizeMultiplier = 0.35f;
+    public static readonly float cubeSizeMultiplier = 1;
 
     List<GameObject> chunksList = new List<GameObject>();
     List<Material> materialsList = new List<Material>();
     byte[] assignData;
     private void Start()
     {
+        totalChunks = (heightCubes * widthCubes) / totalCubesInChunk;
         //Initialize GO Getting the Generation
         //Get the data
         assignData = FileIO.blocksA;
-        for (int i = 0; i < 3; i++)
+        print(assignData.Length);
+        for (int i = 0; i < 4; i++)
         {
 
-            GameObject temp = new GameObject();
+            GameObject temp = new GameObject(i.ToString());
+            //temp.transform.SetParent(this.transform);
             chunksList.Add(temp);
             switch (i)
             {
+                case 0:
+                    float time = Time.realtimeSinceStartup;
+                    temp.AddComponent<ChunkNew>().setParameters(Dispatcher(0),0);
+                    float newTime = Time.realtimeSinceStartup - time;
+                    print(newTime);
+                    break;
                 case 1:
-                    temp.AddComponent<ChunkNew>().setParameters(Dispatcher(0));
+                    temp.AddComponent<ChunkNew>().setParameters(Dispatcher(25), 25);
                     break;
                 case 2:
-                    temp.AddComponent<ChunkNew>().setParameters(Dispatcher(1));
+                    temp.AddComponent<ChunkNew>().setParameters(Dispatcher(104 * 1), 104 * 1);
                     break;
                 case 3:
-                    temp.AddComponent<ChunkNew>().setParameters(Dispatcher(501));
+                    temp.AddComponent<ChunkNew>().setParameters(Dispatcher(1), 1);
                     break;
             }        
         }
@@ -60,5 +71,6 @@ class TerrainSystemNew : MonoBehaviour
         }
         return temp;
     }
+    
 }
 

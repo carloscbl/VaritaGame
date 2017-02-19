@@ -74,8 +74,9 @@ public class ProjectileSystem : MonoBehaviour
             GameObject temp = GameObject.Instantiate((Resources.Load("Projectiles/ProjectileBase")) as GameObject, this.transform);
             temp.name = i.ToString();
             projectilesList.Add(temp);
-            freeProjectilesList = new List<GameObject>(projectilesList);
         }
+
+        freeProjectilesList = new List<GameObject>(projectilesList);
     } 
 
     public void registerAsFree(GameObject projectile)
