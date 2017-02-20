@@ -28,13 +28,13 @@ class TerrainSystemNew : MonoBehaviour
         //Initialize GO Getting the Generation
         //Get the data
         assignData = FileIO.blocksA;
-        print(assignData.Length);
-        for (int i = 0; i < 4; i++)
+        float time = Time.realtimeSinceStartup;
+        for (int i = 0; i < 9; i++)
         {
 
             GameObject temp = new GameObject(i.ToString());
             //temp.transform.SetParent(this.transform);
-            chunksList.Add(temp);
+            chunksList.Add(temp);/*
             switch (i)
             {
                 case 0:
@@ -47,30 +47,21 @@ class TerrainSystemNew : MonoBehaviour
                     temp.AddComponent<ChunkNew>().setParameters(Dispatcher(25), 25);
                     break;
                 case 2:
-                    temp.AddComponent<ChunkNew>().setParameters(Dispatcher(104 * 1), 104 * 1);
+                    temp.AddComponent<ChunkNew>().setParameters(Dispatcher(105), 105);
                     break;
                 case 3:
                     temp.AddComponent<ChunkNew>().setParameters(Dispatcher(1), 1);
                     break;
-            }        
+            }      */
+            temp.AddComponent<ChunkNew>().setParameters(Dispatcher((uint)i), (uint)i);
         }
+        float newTime = Time.realtimeSinceStartup - time;
+        print(newTime);
     }
-    int i = 0;
     private void Update()
     {
-        //We need chunks 0,1,501
-        if(i == 25)
-        {
-            float time = Time.realtimeSinceStartup;
-            GameObject temp = new GameObject(i.ToString());
-            temp.AddComponent<ChunkNew>().setParameters(Dispatcher(45), 45);
-            float newTime = Time.realtimeSinceStartup - time;
-            print(newTime);
-            
-        }
-        i += 1;
+        
     }
-
     private byte[] Dispatcher(uint numOfChunk)
     {
         byte[] temp = new byte[520];
