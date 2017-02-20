@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 
 
-class MeshComposer : MonoBehaviour
+class MeshComposer //: MonoBehaviour
 {
     byte[] data;
     List<Vector3[]> vertexList      = new List<Vector3[]>();
@@ -63,25 +63,20 @@ class MeshComposer : MonoBehaviour
     {
         //Generate cube
         List<Vector3> vertex = new List<Vector3>();
-        //print("--->"+listOfPositions.Count);
         List<Vector3> normals = new List<Vector3>();
         List<Vector2> uvs = new List<Vector2>();
         List<int> triangles = new List<int>();
         Vector2 cubePos;
-        //print(listOfPositions.Count);
-        
+
         for (int i = 0; i < listOfPositions.Count; i++)
         {
-            float row = Mathf.Ceil(listOfPositions[i] / TerrainSystemNew.collSize);
+                float row = Mathf.Ceil(listOfPositions[i] / TerrainSystemNew.collSize);
             cubePos = new Vector2((listOfPositions[i] - (row * TerrainSystemNew.collSize)) * TerrainSystemNew.cubeSizeMultiplier,row * TerrainSystemNew.cubeSizeMultiplier);
-            //print(row);
+      
             vertex.AddRange(getCubeVertex(cubePos));
             normals.AddRange(getCubeNormals());
             uvs.AddRange(getUvs());
             triangles.AddRange(getTriangles(i));
-            //print(i);
-            //print("--->Lenght" + vertex.Count);
-            
         }
         generatedMeshComponents = new MeshComponents();
         generatedMeshComponents.vertex = vertex.ToArray();

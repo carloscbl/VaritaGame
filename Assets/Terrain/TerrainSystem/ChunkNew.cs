@@ -12,6 +12,7 @@ class ChunkNew : MonoBehaviour
     byte[] data;
     uint iAmNumberOfChunk;
     MeshFilter m_MeshFilter;
+    MeshComposer meshGen;
     private void Start()
     {
         
@@ -33,15 +34,21 @@ class ChunkNew : MonoBehaviour
         generateMesh();
         assignMaterials();
         SetLocation(iAmNumberOfChunk);
+        gameObject.name = iAmNumberOfChunk.ToString();
     }
     private void AddComponets()
     {
         this.gameObject.AddComponent<MeshFilter>();
         this.gameObject.AddComponent<MeshRenderer>();
     }
+    private void getMeshGen()
+    {
+        meshGen = new MeshComposer(data);
+    }
     private void generateMesh()
     {
-        MeshComposer meshGen = new MeshComposer(data);
+        
+        getMeshGen();
         m_Mesh = new Mesh();
         m_Mesh.Clear();
 
@@ -61,9 +68,11 @@ class ChunkNew : MonoBehaviour
     private void SetLocation(uint NumberOfChunk)
     {
         float localYNumber = Mathf.Ceil(NumberOfChunk / TerrainSystemNew.chunkColl);
-        float y = TerrainSystemNew.rowSize * TerrainSystemNew.cubeSizeMultiplier * localYNumber;
+        float y = TerrainSystemNew.rowSize * localYNumber * TerrainSystemNew.cubeSizeMultiplier;
+        //print(y);
         float localXNumber = Mathf.Ceil(NumberOfChunk / TerrainSystemNew.chunkRow);
-        float x = TerrainSystemNew.collSize * TerrainSystemNew.cubeSizeMultiplier * localXNumber +(NumberOfChunk - (localXNumber *TerrainSystemNew.chunkRow));
+        float x = ((NumberOfChunk - (localYNumber * TerrainSystemNew.chunkColl)) *TerrainSystemNew.cubeSizeMultiplier) * TerrainSystemNew.collSize;
+        //print(x+":"+NumberOfChunk + ":" + localYNumber + ":" +TerrainSystemNew.chunkColl + ":" +TerrainSystemNew.cubeSizeMultiplier);
         //print(NumberOfChunk+"->"+x + ":"+ y);
         this.transform.Translate(  new Vector3(x, y),Space.World);
         this.transform.localScale = new Vector3(1,1,1);
