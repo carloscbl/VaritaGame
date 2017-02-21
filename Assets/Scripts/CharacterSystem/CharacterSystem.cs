@@ -21,25 +21,9 @@ public class CharacterSystem : MonoBehaviour {
     {
         instantiateNewPlayer("Arwin");
     }
-    void Start () {
-        /*
-                test = Instantiate(Resources.Load("CharacterBase")) as GameObject;
-
-                test.AddComponent<Character>().mainPlayer = true;
-                test.name = "TestPlayerBase";
-                currentCharactersActivesList.Add(test.GetComponent<Character>());
-                mainCharacter = test;
-                */
-
-        //mainCharacter = GameObject.Find("CharacterBase");
-       //instantiateNewPlayer("Arwin");
-        for (int i = 0; i < 5; i++)
-        {
-           //GameObject temp = instantiateNewPlayer("Dummy");
-            //temp.transform.position = new Vector2(i - (i*2)*2f, 2);
-        }
-        
-
+    void Start ()
+    {
+     
     }
 	public GameObject instantiateNewPlayer(string name)
 	{

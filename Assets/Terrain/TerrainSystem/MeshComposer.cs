@@ -16,6 +16,7 @@ class MeshComposer //: MonoBehaviour
     List<int[]>     trianglesList   = new List<int[]>();
     Hashtable hashTable = new Hashtable(255);
     List<List<int>> positionsInChunk = new List<List<int>>();
+    List<MeshComponents> materialsList = new List<MeshComponents>();
     public struct MeshComponents
     {
         public Vector3[]   vertex;
@@ -56,10 +57,13 @@ class MeshComposer //: MonoBehaviour
         //We are doing the Merge per Material
         for (int i = 0; i < positionsInChunk.Count; i++)
         {
-            generateMesh(positionsInChunk[i]);
+            new Thread(()=> {
+                materialsList.Insert(i, generateMesh(positionsInChunk[i]));
+            }).Start();
+            
         }
     }
-    private void generateMesh(List<int> listOfPositions)
+    private MeshComponents generateMesh(List<int> listOfPositions)
     {
         //Generate cube
         List<Vector3> vertex = new List<Vector3>();
@@ -83,7 +87,7 @@ class MeshComposer //: MonoBehaviour
         generatedMeshComponents.normals = normals.ToArray();
         generatedMeshComponents.uvs = uvs.ToArray();
         generatedMeshComponents.triangles = triangles.ToArray();
-
+        return generatedMeshComponents;
     }
     private Vector3[] getCubeVertex(Vector2 cubePos)
     {
