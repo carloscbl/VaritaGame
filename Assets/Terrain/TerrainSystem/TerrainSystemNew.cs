@@ -20,6 +20,7 @@ class TerrainSystemNew : MonoBehaviour
     public static readonly float cubeSizeMultiplier = 1;
 
     List<GameObject> chunksList = new List<GameObject>();
+    List<uint> chunksNumberList = new List<uint>();
     List<Material> materialsList = new List<Material>();
     byte[] assignData;
     private void Start()
@@ -28,38 +29,29 @@ class TerrainSystemNew : MonoBehaviour
         //Initialize GO Getting the Generation
         //Get the data
         assignData = FileIO.blocksA;
-        float time = Time.realtimeSinceStartup;
-        for (int i = 0; i < 9; i++)
-        {
-
-            GameObject temp = new GameObject(i.ToString());
-            //temp.transform.SetParent(this.transform);
-            chunksList.Add(temp);/*
-            switch (i)
-            {
-                case 0:
-                    float time = Time.realtimeSinceStartup;
-                    temp.AddComponent<ChunkNew>().setParameters(Dispatcher(0),0);
-                    float newTime = Time.realtimeSinceStartup - time;
-                    print(newTime);
-                    break;
-                case 1:
-                    temp.AddComponent<ChunkNew>().setParameters(Dispatcher(25), 25);
-                    break;
-                case 2:
-                    temp.AddComponent<ChunkNew>().setParameters(Dispatcher(105), 105);
-                    break;
-                case 3:
-                    temp.AddComponent<ChunkNew>().setParameters(Dispatcher(1), 1);
-                    break;
-            }      */
-            temp.AddComponent<ChunkNew>().setParameters(Dispatcher((uint)i), (uint)i);
-        }
-        float newTime = Time.realtimeSinceStartup - time;
-        print(newTime);
     }
     private void Update()
     {
+        
+    }
+    public void sayHello()
+    {
+        print("hello");
+    }
+    public void DrawChunks(List<uint> listOfChunks)
+    {
+        for (int i = 0; i < listOfChunks.Count; i++)
+        {
+            if (chunksNumberList.All(item => item != listOfChunks[i]))
+            {
+                float time = Time.realtimeSinceStartup;
+                GameObject temp = new GameObject(listOfChunks[i].ToString());
+                chunksList.Add(temp);
+                temp.AddComponent<ChunkNew>().setParameters(Dispatcher(listOfChunks[i]), listOfChunks[i]);
+                chunksNumberList.Add(listOfChunks[i]);
+                print(Time.realtimeSinceStartup - time);
+            }
+        }
         
     }
     private byte[] Dispatcher(uint numOfChunk)

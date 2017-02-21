@@ -14,10 +14,14 @@ public class CharacterSystem : MonoBehaviour {
 		Std,
 		Elementalist
 	}
-	//Instanciar un objeto bajo demanda.
-	//Añadirlo a la lista
-	// Use this for initialization
-	void Start () {
+    //Instanciar un objeto bajo demanda.
+    //Añadirlo a la lista
+    // Use this for initialization
+    private void Awake()
+    {
+        instantiateNewPlayer("Arwin");
+    }
+    void Start () {
         /*
                 test = Instantiate(Resources.Load("CharacterBase")) as GameObject;
 
@@ -28,7 +32,7 @@ public class CharacterSystem : MonoBehaviour {
                 */
 
         //mainCharacter = GameObject.Find("CharacterBase");
-       instantiateNewPlayer("Arwin");
+       //instantiateNewPlayer("Arwin");
         for (int i = 0; i < 5; i++)
         {
            //GameObject temp = instantiateNewPlayer("Dummy");

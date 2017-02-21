@@ -21,7 +21,7 @@ class GameSystem : MonoBehaviour
     private void Start()
     {
         initializeProjectileSystem();
-        print("holaGamesistem");
+        //print("holaGamesistem");
     }
     byte firstFrame = 0;
     private void Update()
