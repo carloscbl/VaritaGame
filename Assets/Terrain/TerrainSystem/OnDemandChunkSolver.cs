@@ -137,7 +137,6 @@ class OnDemandChunkSolver : MonoBehaviour
             }
             #endregion
         }
-
         return chunksNumberList;
     }
 }

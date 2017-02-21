@@ -13,6 +13,7 @@ class ChunkNew : MonoBehaviour
     uint iAmNumberOfChunk;
     MeshFilter m_MeshFilter;
     MeshComposer meshGen;
+    List<Material> materials;
     private void Start()
     {
         
@@ -52,18 +53,30 @@ class ChunkNew : MonoBehaviour
         m_Mesh = new Mesh();
         m_Mesh.Clear();
 
-        m_Mesh.vertices     = meshGen.generatedMeshComponents.vertex;
-        m_Mesh.normals      = meshGen.generatedMeshComponents.normals;
-        m_Mesh.uv           = meshGen.generatedMeshComponents.uvs;
-        m_Mesh.triangles    = meshGen.generatedMeshComponents.triangles;
-
+        m_Mesh.SetVertices(meshGen.generatedMeshComponents.vertex);
+        m_Mesh.SetNormals(meshGen.generatedMeshComponents.normals);
+        m_Mesh.SetUVs(0,meshGen.generatedMeshComponents.uvs);
+        m_Mesh.subMeshCount = meshGen.materialsNumberList.Count;
+        for (int i = 0; i < meshGen.materialsNumberList.Count; i++)
+        {
+            m_Mesh.SetTriangles(meshGen.generatedMeshComponents.triangles[i], i);
+        }
         m_Mesh.RecalculateBounds();
-
-        this.GetComponent<MeshFilter>().mesh = m_Mesh;
+        m_Mesh.RecalculateNormals();
+        this.GetComponent<MeshFilter>().sharedMesh = m_Mesh;
     }
     private void assignMaterials()
     {
-        this.GetComponent<MeshRenderer>().material =Resources.Load("rock", typeof(Material)) as Material;
+        materials = new List<Material>();
+        Material[] mat = {
+        Resources.Load("air", typeof(Material)) as Material,
+        Resources.Load("rock", typeof(Material)) as Material,
+        Resources.Load("grass", typeof(Material)) as Material,
+        Resources.Load("sand", typeof(Material)) as Material,
+        Resources.Load("water", typeof(Material)) as Material,
+        Resources.Load("bedrock", typeof(Material)) as Material
+    };
+        this.GetComponent<MeshRenderer>().materials = mat;
     }
     private void SetLocation(uint NumberOfChunk)
     {

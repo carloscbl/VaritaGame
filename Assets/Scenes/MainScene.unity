@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.001
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1.07
@@ -4881,6 +4881,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e4ec5a5a82ecd4487334ece532b3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentCamera: {fileID: 0}
+  currentCameraPosition: {x: 0, y: 0}
+  CharacterSystem: {fileID: 0}
+  tsNew: {fileID: 0}
+  Case: 0
 --- !u!1 &1775207257
 GameObject:
   m_ObjectHideFlags: 0
@@ -5345,7 +5350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1933634798
 Transform:
   m_ObjectHideFlags: 0
