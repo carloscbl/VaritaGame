@@ -17,7 +17,7 @@ class TerrainSystemNew : MonoBehaviour
     public static readonly ushort rowSize = 20;
     public static readonly ushort collSize = 26;
     public static readonly uint totalCubesInChunk = (uint)(rowSize * collSize);
-    public static readonly float cubeSizeMultiplier = 1;
+    public static readonly float cubeSizeMultiplier = .5f;
 
     List<GameObject> chunksList = new List<GameObject>();
     List<uint> chunksNumberList = new List<uint>();
