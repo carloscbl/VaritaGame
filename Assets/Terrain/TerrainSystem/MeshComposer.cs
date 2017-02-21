@@ -14,54 +14,52 @@ class MeshComposer //: MonoBehaviour
     List<Vector3[]> normalsList     = new List<Vector3[]>();
     List<Vector3[]> uvsList         = new List<Vector3[]>();
     List<int[]>     trianglesList   = new List<int[]>();
-    Hashtable hashTable = new Hashtable(255);
+    public List<int> materialsNumberList = new List<int>();
     List<List<int>> positionsInChunk = new List<List<int>>();
-    List<MeshComponents> materialsList = new List<MeshComponents>();
     public struct MeshComponents
     {
-        public Vector3[]   vertex;
-        public Vector3[]   normals;
-        public Vector2[]   uvs;
-        public int[]       triangles;
+        public List<Vector3> vertex;
+        public List<Vector3> normals;
+        public List<Vector2> uvs;
+        public List<List<int>> triangles;
+        //public uint        materialNumber;
     }
+    public List<int>[] MaterialAndPosition;
     public MeshComponents generatedMeshComponents;
     public MeshComposer(byte [] data)
     {
         this.data = data;
-
+        
+        MaterialAndPosition = new List<int>[255];
+        List<int> Positions = new List<int>();
         for (int i = 0; i < data.Length; i++)
         {
-            if (hashTable.ContainsKey(data[i]))
+            if(MaterialAndPosition[data[i]] == null)
             {
-               List<int> temp = hashTable[data[i]] as List<int>;
-                temp.Add(i);
-            }else
-            {
-                List<int> temp = new List<int>();
-                temp.Add(i);
-                positionsInChunk.Add(temp);
-                hashTable.Add(data[i], temp);
-                
+                MaterialAndPosition[data[i]] = new List<int>();
+                MaterialAndPosition[data[i]].Add(i);
+                materialsNumberList.Add(data[i]);
+                Positions.Add(data[i]);
             }
-            //Probar que todo funciona correcto :) <-----
-        }/*
-        print(positionsInChunk.Count);
-        print(positionsInChunk[0].Count);
-        print(positionsInChunk[1].Count);
-        print(positionsInChunk[2].Count);
-        */
-        generateMeshes();
+            else
+            {
+                MaterialAndPosition[data[i]].Add(i);
+            }
+        }
+        generatedMeshComponents = new MeshComponents();
+        generatedMeshComponents.triangles = new List<List<int>>();
+        generatedMeshComponents.vertex = new List<Vector3>();
+        generatedMeshComponents.normals = new List<Vector3>();
+        generatedMeshComponents.uvs = new List<Vector2>();
+        foreach (int item in Positions)
+        {
+            generateMesh(MaterialAndPosition[item]);
+        }
     }
-    private void generateMeshes()
+    private void generateMeshes(int i)
     {
         //We are doing the Merge per Material
-        for (int i = 0; i < positionsInChunk.Count; i++)
-        {
-            new Thread(()=> {
-                materialsList.Insert(i, generateMesh(positionsInChunk[i]));
-            }).Start();
-            
-        }
+        generateMesh(positionsInChunk[i]);
     }
     private MeshComponents generateMesh(List<int> listOfPositions)
     {
@@ -74,19 +72,17 @@ class MeshComposer //: MonoBehaviour
 
         for (int i = 0; i < listOfPositions.Count; i++)
         {
-                float row = Mathf.Ceil(listOfPositions[i] / TerrainSystemNew.collSize);
+            float row = Mathf.Ceil(listOfPositions[i] / TerrainSystemNew.collSize);
             cubePos = new Vector2((listOfPositions[i] - (row * TerrainSystemNew.collSize)) * TerrainSystemNew.cubeSizeMultiplier,row * TerrainSystemNew.cubeSizeMultiplier);
-      
             vertex.AddRange(getCubeVertex(cubePos));
             normals.AddRange(getCubeNormals());
             uvs.AddRange(getUvs());
-            triangles.AddRange(getTriangles(i));
+            triangles.AddRange(getTriangles(listOfPositions[i]));
         }
-        generatedMeshComponents = new MeshComponents();
-        generatedMeshComponents.vertex = vertex.ToArray();
-        generatedMeshComponents.normals = normals.ToArray();
-        generatedMeshComponents.uvs = uvs.ToArray();
-        generatedMeshComponents.triangles = triangles.ToArray();
+        generatedMeshComponents.vertex.AddRange(vertex);
+        generatedMeshComponents.normals.AddRange(normals);
+        generatedMeshComponents.uvs.AddRange(uvs);
+        generatedMeshComponents.triangles.Add(triangles);
         return generatedMeshComponents;
     }
     private Vector3[] getCubeVertex(Vector2 cubePos)
