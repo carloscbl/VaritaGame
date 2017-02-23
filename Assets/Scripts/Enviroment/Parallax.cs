@@ -166,6 +166,7 @@ public class Parallax : MonoBehaviour {
                         matGen = Resources.Load<Material>("Art/Textures/BackGrounds/Materials/pillar");
                         break;
                 }
+                this.GetComponent<MeshRenderer>().material = matGen;
             }
                 Material mat = matGen;
             //this.GetComponent<Renderer>().material.SetTextureScale("_MainTex", new Vector2(mat.GetTextureScale("_MainTex").x*1.5f, mat.GetTextureScale("_MainTex").y*1.5f));
