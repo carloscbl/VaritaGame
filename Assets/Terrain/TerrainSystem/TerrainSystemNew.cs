@@ -18,6 +18,7 @@ class TerrainSystemNew : MonoBehaviour
     public static readonly ushort collSize = 26;
     public static readonly uint totalCubesInChunk = (uint)(rowSize * collSize);
     public static readonly float cubeSizeMultiplier = .5f;
+    public static Material[] mat;
 
     List<GameObject> chunksList = new List<GameObject>();
     List<uint> chunksNumberList = new List<uint>();
@@ -26,6 +27,14 @@ class TerrainSystemNew : MonoBehaviour
     private void Start()
     {
         totalChunks = (heightCubes * widthCubes) / totalCubesInChunk;
+        mat = new Material[]{
+        Resources.Load("air",       typeof(Material)) as Material,
+        Resources.Load("rock",      typeof(Material)) as Material,
+        Resources.Load("grass",     typeof(Material)) as Material,
+        Resources.Load("sand",      typeof(Material)) as Material,
+        Resources.Load("water",     typeof(Material)) as Material,
+        Resources.Load("bedrock",   typeof(Material)) as Material
+    };
         //Initialize GO Getting the Generation
         //Get the data
         assignData = FileIO.blocksA;
@@ -44,12 +53,15 @@ class TerrainSystemNew : MonoBehaviour
         {
             if (chunksNumberList.All(item => item != listOfChunks[i]))
             {
-                float time = Time.realtimeSinceStartup;
-                GameObject temp = new GameObject(listOfChunks[i].ToString());
-                chunksList.Add(temp);
-                temp.AddComponent<ChunkNew>().setParameters(Dispatcher(listOfChunks[i]), listOfChunks[i]);
-                chunksNumberList.Add(listOfChunks[i]);
-                print(Time.realtimeSinceStartup - time);
+                if(listOfChunks[i] >=0 && listOfChunks[i] <= (chunkColl * chunkRow) - 1)
+                {
+                    float time = Time.realtimeSinceStartup;
+                    GameObject temp = new GameObject(listOfChunks[i].ToString());
+                    chunksList.Add(temp);
+                    temp.AddComponent<ChunkNew>().setParameters(Dispatcher(listOfChunks[i]), listOfChunks[i]);
+                    chunksNumberList.Add(listOfChunks[i]);
+                    print(Time.realtimeSinceStartup - time);
+                }
             }
         }
         

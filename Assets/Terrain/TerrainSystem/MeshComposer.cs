@@ -34,26 +34,32 @@ class MeshComposer //: MonoBehaviour
         List<int> Positions = new List<int>();
         for (int i = 0; i < data.Length; i++)
         {
-            if(MaterialAndPosition[data[i]] == null)
+            if (data[i] != 0 && data[i] != 4)
             {
-                MaterialAndPosition[data[i]] = new List<int>();
-                MaterialAndPosition[data[i]].Add(i);
-                materialsNumberList.Add(data[i]);
-                Positions.Add(data[i]);
+                if (MaterialAndPosition[data[i]] == null)
+                {
+                    MaterialAndPosition[data[i]] = new List<int>();
+                    MaterialAndPosition[data[i]].Add(i);
+                    materialsNumberList.Add(data[i]);
+                    Positions.Add(data[i]);
+                }
+                else
+                {
+                    MaterialAndPosition[data[i]].Add(i);
+                }
             }
-            else
-            {
-                MaterialAndPosition[data[i]].Add(i);
-            }
+                
         }
         generatedMeshComponents = new MeshComponents();
         generatedMeshComponents.triangles = new List<List<int>>();
         generatedMeshComponents.vertex = new List<Vector3>();
         generatedMeshComponents.normals = new List<Vector3>();
         generatedMeshComponents.uvs = new List<Vector2>();
-        foreach (int item in Positions)
+        for (int i = 0; i < Positions.Count; i++)
         {
-            generateMesh(MaterialAndPosition[item]);
+            //if(Positions[i] !=5)
+            generateMesh(MaterialAndPosition[Positions[i]]);
+            //print(Positions[i]);
         }
     }
     private void generateMeshes(int i)
@@ -64,9 +70,11 @@ class MeshComposer //: MonoBehaviour
     private MeshComponents generateMesh(List<int> listOfPositions)
     {
         //Generate cube
+        /*
         List<Vector3> vertex = new List<Vector3>();
         List<Vector3> normals = new List<Vector3>();
         List<Vector2> uvs = new List<Vector2>();
+        */
         List<int> triangles = new List<int>();
         Vector2 cubePos;
 
@@ -74,14 +82,15 @@ class MeshComposer //: MonoBehaviour
         {
             float row = Mathf.Ceil(listOfPositions[i] / TerrainSystemNew.collSize);
             cubePos = new Vector2((listOfPositions[i] - (row * TerrainSystemNew.collSize)) * TerrainSystemNew.cubeSizeMultiplier,row * TerrainSystemNew.cubeSizeMultiplier);
-            vertex.AddRange(getCubeVertex(cubePos));
-            normals.AddRange(getCubeNormals());
-            uvs.AddRange(getUvs());
-            triangles.AddRange(getTriangles(listOfPositions[i]));
+            generatedMeshComponents.vertex.AddRange(getCubeVertex(cubePos));
+            generatedMeshComponents.normals.AddRange(getCubeNormals());
+            generatedMeshComponents.uvs.AddRange(getUvs());
+           //triangles.AddRange(getTriangles(listOfPositions[i]));
+            triangles.AddRange(getTriangles((generatedMeshComponents.vertex.Count/24)-1));
         }
-        generatedMeshComponents.vertex.AddRange(vertex);
-        generatedMeshComponents.normals.AddRange(normals);
-        generatedMeshComponents.uvs.AddRange(uvs);
+        //generatedMeshComponents.vertex.AddRange(vertex);
+        //generatedMeshComponents.normals.AddRange(normals);
+        //generatedMeshComponents.uvs.AddRange(uvs);
         generatedMeshComponents.triangles.Add(triangles);
         return generatedMeshComponents;
     }
@@ -114,7 +123,7 @@ class MeshComposer //: MonoBehaviour
 
         for (int i = 0; i < vertexList.Count; i++)
         {
-            vertexList[i] = new Vector3(vertexList[i].x + cubePos.x, vertexList[i].y +cubePos.y, vertexList[i].z);
+            vertexList[i] = new Vector3(vertexList[i].x + cubePos.x + length, vertexList[i].y + width + cubePos.y, vertexList[i].z);
             //print(vertexList[i]);
         }
 
@@ -212,7 +221,7 @@ class MeshComposer //: MonoBehaviour
     {
         #region Triangles
         //cubeCount +=1;
-        cubeCount = cubeCount * 24;
+        cubeCount = (cubeCount * 24);
         int[] triangles = new int[]
         {
         
@@ -239,57 +248,6 @@ class MeshComposer //: MonoBehaviour
 	// Top
 	(3 + 4 * 5)+cubeCount, (1 + 4 * 5)+cubeCount, (0 + 4 * 5)+cubeCount,
     (3 + 4 * 5)+cubeCount, (2 + 4 * 5)+cubeCount, (1 + 4 * 5)+cubeCount,
-
-    /*
-    // Bottom
-	((3+1)*cubeCount)-1,(( 1+1)*cubeCount)-1,(( 0+1)*cubeCount)-1,
-    ((3+1)*cubeCount)-1,(( 2+1)*cubeCount)-1,(( 1+1)*cubeCount)-1,		
- 
-	// Left
-	((3 + 4 * 1+1)*cubeCount)-1,(( 1 + 4 * 1+1)*cubeCount)-1,(( 0 + 4 * 1+1)*cubeCount)-1,
-    ((3 + 4 * 1+1)*cubeCount)-1,(( 2 + 4 * 1+1)*cubeCount)-1,(( 1 + 4 * 1+1)*cubeCount)-1,
- 
-	// Front
-	((3 + 4 * 2+1)*cubeCount)-1,(( 1 + 4 * 2+1)*cubeCount)-1,(( 0 + 4 * 2+1)*cubeCount)-1,
-    ((3 + 4 * 2+1)*cubeCount)-1,(( 2 + 4 * 2+1)*cubeCount)-1,(( 1 + 4 * 2+1)*cubeCount)-1,
- 
-	// Back
-	((3 + 4 * 3+1)*cubeCount)-1,(( 1 + 4 * 3+1)*cubeCount)-1,(( 0 + 4 * 3+1)*cubeCount)-1,
-    ((3 + 4 * 3+1)*cubeCount)-1,(( 2 + 4 * 3+1)*cubeCount)-1,(( 1 + 4 * 3+1)*cubeCount)-1,
- 
-	// Right
-	((3 + 4 * 4+1)*cubeCount)-1,(( 1 + 4 * 4+1)*cubeCount)-1,(( 0 + 4 * 4+1)*cubeCount)-1,
-    ((3 + 4 * 4+1)*cubeCount)-1,(( 2 + 4 * 4+1)*cubeCount)-1,(( 1 + 4 * 4+1)*cubeCount)-1,
- 
-	// Top
-	((3 + 4 * 5+1)*cubeCount)-1,(( 1 + 4 * 5+1)*cubeCount)-1,(( 0 + 4 * 5+1)*cubeCount)-1,
-    ((3 + 4 * 5+1)*cubeCount)-1,(( 2 + 4 * 5+1)*cubeCount)-1,(( 1 + 4 * 5+1)*cubeCount)-1,
-
-    /*
-    // Bottom
-	3, 1, 0,
-    3, 2, 1,			
- 
-	// Left
-	3 + 4 * 1, 1 + 4 * 1, 0 + 4 * 1,
-    3 + 4 * 1, 2 + 4 * 1, 1 + 4 * 1,
- 
-	// Front
-	3 + 4 * 2, 1 + 4 * 2, 0 + 4 * 2,
-    3 + 4 * 2, 2 + 4 * 2, 1 + 4 * 2,
- 
-	// Back
-	3 + 4 * 3, 1 + 4 * 3, 0 + 4 * 3,
-    3 + 4 * 3, 2 + 4 * 3, 1 + 4 * 3,
- 
-	// Right
-	3 + 4 * 4, 1 + 4 * 4, 0 + 4 * 4,
-    3 + 4 * 4, 2 + 4 * 4, 1 + 4 * 4,
- 
-	// Top
-	3 + 4 * 5, 1 + 4 * 5, 0 + 4 * 5,
-    3 + 4 * 5, 2 + 4 * 5, 1 + 4 * 5,
-    */
         };
         #endregion
         return triangles;

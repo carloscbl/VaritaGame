@@ -79,16 +79,7 @@ public class Projectile : MonoBehaviour
             }
         }
 
-        if (this.destroyTerrain)
-        {
-            print(other.gameObject.name);
-            TerrainSystem ts = GameObject.Find("Root").transform.Find("TerrainSystem").gameObject.GetComponent<TerrainSystem>();
-            Chunk tempChunk = ts.findChunk(other.gameObject.name);
-            if (tempChunk != null)
-            {
-                tempChunk.updateMesh(this.transform.position);
-            }
-        }
+       
     }
     private void resetProjectile()
     {
@@ -96,10 +87,22 @@ public class Projectile : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        //collision.t
     }
     private void OnTriggerStay(Collider other)
     {
-        //print("TrigerStay" + other.gameObject.name);
+        if (this.destroyTerrain)
+        {
+            //print(other.gameObject.name);
+            //other.transform.
+            ChunkNew newe = other.gameObject.GetComponent<ChunkNew>();
+            if (newe)
+            {
+                //print(other.gameObject.name);
+                //this.gameObject.GetComponent<Collider>().
+                newe.removeCube(newe.parsePositionToCube(this.transform.position));
+            }
+        }
     }
     protected virtual void InitializeProperties()
     {
