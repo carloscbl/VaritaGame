@@ -87,7 +87,23 @@ public class Projectile : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        //collision.t
+        //print("Hola");
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (this.destroyTerrain)
+        {
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Projectile"), LayerMask.NameToLayer("Player"));
+            ChunkNew newe = collision.transform.gameObject.GetComponent<ChunkNew>();
+            for (int i = 0; i < collision.contacts.Length; i++)
+            {
+                if (newe)
+                {
+                    newe.removeCube(newe.parsePositionToCube(collision.contacts[i].point));
+                }
+            }
+            
+        }
     }
     private void OnTriggerStay(Collider other)
     {
