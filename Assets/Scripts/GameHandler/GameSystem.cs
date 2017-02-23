@@ -22,6 +22,7 @@ class GameSystem : MonoBehaviour
     {
         initializeProjectileSystem();
         //print("holaGamesistem");
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Projectile"), LayerMask.NameToLayer("Player"));
     }
     byte firstFrame = 0;
     private void Update()

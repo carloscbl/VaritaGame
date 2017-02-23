@@ -18,7 +18,7 @@ class TerrainGeneration : MonoBehaviour
     static public byte [,] TrueGenTerrain()
     {
         System.Random rnd = new System.Random();
-        byte[,] blocks = new byte[5460, 1000];
+        byte[,] blocks = new byte[2730, 500];
         for (int px = 0; px < blocks.GetLength(0); px++)
         {
             int stone = Noise(px, 0, 80, 15, 1);
@@ -59,7 +59,28 @@ class TerrainGeneration : MonoBehaviour
                 }
                 blocks[px, py] = Convert.ToByte(rnd.Next(0, 6));
                 //blocks[px, py] = 1;
+                if (py > 455)
+                {
+                    blocks[px, py] = 5;
+                }
+                else if (py > 455/2)
+                {
+                    blocks[px, py] = 4;
+                }
+                else if (py > 455/3)
+                {
+                    blocks[px, py] = 3;
+                }
+                else if (py > 455/4)
+                {
+                    blocks[px, py] = 2;
+                }
+                else if (py > 455/5)
+                {
+                    blocks[px, py] = 1;
+                }
             }
+
         }
         /*for(int i = 0;i< blocks.GetLength(0);i++)
         {

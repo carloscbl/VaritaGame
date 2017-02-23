@@ -22,7 +22,7 @@ class ChunkNew : MonoBehaviour
     }
     private void Update()
     {
-        if (counterO == 10)
+        if (counterO == 3)
         {
             if (StackOfChangesToRemove.Count != 0)
             {
@@ -30,9 +30,9 @@ class ChunkNew : MonoBehaviour
                 {
                     this.data[StackOfChangesToRemove[i]] = 0;
                 }
-                print(StackOfChangesToRemove.Count);
+                //print(StackOfChangesToRemove.Count);
                 StackOfChangesToRemove.Clear();
-                print("refresco");
+                //print("refresco");
                 refreshChunk();
             }
             counterO = 0;
@@ -114,7 +114,6 @@ class ChunkNew : MonoBehaviour
     public uint parsePositionToCube(Vector2 position)
     {
         Vector2 localPos = position - (Vector2)this.gameObject.transform.position;
-        //Wrong!!!!! !!!!!! <--------------
         int y = (int)Mathf.Floor((localPos.y * TerrainSystemNew.rowSize) / (TerrainSystemNew.rowSize * TerrainSystemNew.cubeSizeMultiplier));
         int x = (int)Mathf.Floor((localPos.x * TerrainSystemNew.collSize) / (TerrainSystemNew.collSize * TerrainSystemNew.cubeSizeMultiplier));
         int cubeID = (y * TerrainSystemNew.collSize) + x;
