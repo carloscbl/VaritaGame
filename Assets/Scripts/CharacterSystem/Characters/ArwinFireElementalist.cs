@@ -12,7 +12,7 @@ class ArwinFireElementalist : Character
         base.Start();
         gameObject.AddComponent<PlayerMovController>();
         //Set position
-        gameObject.transform.Translate(new Vector2(5, 250), Space.World);
+        gameObject.transform.Translate(new Vector2(5, 5), Space.World);
         projectileSystem = GameObject.Find("ProjectileSystem").GetComponent<ProjectileSystem>();
         MyFaction = Faction.Player;
         data = new ProjectileSystem.ProjectileData();
