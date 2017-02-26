@@ -8,91 +8,182 @@ using System.Collections;
 
 class TerrainGeneration : MonoBehaviour 
 {
-    static int Noise(int x, int y, float scale, float mag, float exp)
+    private void Start()
     {
-
-        return (int)(Mathf.Pow((Mathf.PerlinNoise(x / scale, y / scale) * mag), (exp)));
 
     }
-   
-    static public byte [,] TrueGenTerrain()
+    //[Range(2, 512)]
+    public int resolution = (int)TerrainSystemNew.widthCubes;
+    public int resolutionY = (int)TerrainSystemNew.heightCubes;
+
+    public float frequency = 23.4f;
+
+    [Range(1, 8)]
+    public int octaves = 3;
+
+    [Range(1f, 4f)]
+    public float lacunarity = 1.65f;
+
+    [Range(0f, 1f)]
+    public float persistence = 0f;
+
+    [Range(1, 3)]
+    public int dimensions = 3;
+
+    public NoiseMethodType type;// = NoiseMethodType.Perlin;
+
+    public Gradient coloring;
+
+    private Texture2D texture;
+    //public byte [,] GenTerrainNew()
+    //{
+    //    byte[,] data = new byte[resolution, resolution];
+
+    //    NoiseMethod method = Noise.methods[(int)type][dimensions - 1];
+    //    //float stepSize = 1f / resolution;
+
+    //    for (int y = 0; y < resolution; y++)
+    //    {
+    //        //Vector3 point0 = Vector3.Lerp(point00, point01, (y + 0.5f) * stepSize);
+    //        //Vector3 point1 = Vector3.Lerp(point10, point11, (y + 0.5f) * stepSize);
+    //        for (int x = 0; x < resolution; x++)
+    //        {
+    //            //Vector3 point = Vector3.Lerp(point0, point1, (x + 0.5f) * stepSize);
+    //            float sample = Noise.Sum(method, new Vector3(x,y,0), frequency, octaves, lacunarity, persistence);
+
+    //            if (type != NoiseMethodType.Value)
+    //            {
+    //                sample = sample * 0.5f + 0.5f;
+    //            }
+    //            if (sample >= 0.3f && sample <= 0.4f)
+    //            {
+    //                data[y, x] = 0;
+    //            }else
+    //            {
+    //                data[y, x] = 1;
+    //            }
+    //            //data[x,y] =
+    //            //texture.SetPixel(x, y, coloring.Evaluate(sample));
+    //        }
+    //    }
+    //    return data;
+    //}
+
+    public byte[,] GenTerrainNew()
     {
-        System.Random rnd = new System.Random();
-        byte[,] blocks = new byte[2730, 500];
-        for (int px = 0; px < blocks.GetLength(0); px++)
+        byte[,] data = new byte[2730, 2730];
+
+        
+
+        //Vector3 point00 = transform.TransformPoint(new Vector3(-0.5f, -0.5f));
+        //Vector3 point10 = transform.TransformPoint(new Vector3(0.5f, -0.5f));
+        //Vector3 point01 = transform.TransformPoint(new Vector3(-0.5f, 0.5f));
+        //Vector3 point11 = transform.TransformPoint(new Vector3(0.5f, 0.5f));
+
+        Vector3 point00 = transform.TransformPoint(new Vector3(-0.5f, -0.5f));
+        Vector3 point10 = transform.TransformPoint(new Vector3(0.5f, -0.5f));
+        Vector3 point01 = transform.TransformPoint(new Vector3(-0.5f, 0.5f));
+        Vector3 point11 = transform.TransformPoint(new Vector3(0.5f, 0.5f));
+
+        NoiseMethod method = Noise.methods[(int)type][dimensions - 1];
+        float stepSize = 1f / resolution;
+        for (int y = 0; y < resolution; y++)
         {
-            int stone = Noise(px, 0, 80, 15, 1);
-            stone += Noise(px, 0, 50, 30, 1);
-            stone += Noise(px, 0, 10, 10, 1);
-            stone += 280 * 1000 / 400;
-
-            int dirt = Noise(px, 0, 100f, 35, 1);
-            dirt += Noise(px, 100, 50, 30, 1);
-            dirt += 300*1000/400;
-
-            
-
-            for (int py = 0; py < blocks.GetLength(1); py++)
+            Vector3 point0 = Vector3.Lerp(point00, point01, (y + 0.5f) * stepSize);
+            Vector3 point1 = Vector3.Lerp(point10, point11, (y + 0.5f) * stepSize);
+            for (int x = 0; x < resolution; x++)
             {
-                if (py < stone)
-                {
-                    blocks[px, py] = 1;
+                Vector3 point = Vector3.Lerp(point0, point1, (x + 0.5f) * stepSize);
+                float sample = Noise.Sum(method, point, frequency, octaves, lacunarity, persistence);
 
-                    //The next three lines make dirt spots in random places
-                    if (Noise(px, py, 12, 16, 1) > 10)
-                    {
-                        blocks[px, py] = 2;
-
-                    }
-                    //The next three lines remove dirt and rock to make caves in certain places
-                    if (Noise(px, py * 2, 16, 14, 1) > 10)
-                    { //Caves
-                        blocks[px, py] = 0;
-
-                    }
-
-
-                }
-                else if (py < dirt)
+                if (type != NoiseMethodType.Value)
                 {
-                    blocks[px, py] = 2;
+                    sample = sample * 0.5f + 0.5f;
                 }
-                blocks[px, py] = Convert.ToByte(rnd.Next(0, 6));
-                //blocks[px, py] = 1;
-                if (py > 455)
+                if (/*sample >= 0.3f &&*/ sample <= 0.43f)
                 {
-                    blocks[px, py] = 5;
+                    data[y, x] = 0;
                 }
-                else if (py > 455/2)
+                else
                 {
-                    blocks[px, py] = 4;
+                    data[y, x] = 1;
                 }
-                else if (py > 455/3)
-                {
-                    blocks[px, py] = 3;
-                }
-                else if (py > 455/4)
-                {
-                    blocks[px, py] = 2;
-                }
-                else if (py > 455/5)
-                {
-                    blocks[px, py] = 1;
-                }
+                //texture.SetPixel(x, y, coloring.Evaluate(sample));
             }
-
         }
-        /*for(int i = 0;i< blocks.GetLength(0);i++)
+        //texture.Apply();
+        //int count = 0;
+        //for (int i = 0; i < 2730; i++)
+        //{
+        //    for (int e = 0; e < 500; e++)
+        //    {
+        //        if (count == 521 || count == 20 || count == 54600 || count == 108990 || count == 165360)
+        //        {
+        //            data[i, e] = 2;
+        //        }else
+        //        {
+        //            data[i, e] = 1;
+        //        }
+        //        count++;
+        //    }
+        //}
+        return data;
+    }
+
+    private void OnEnable()
+    {
+        if (texture == null)
         {
-            for (int e = 0; e < blocks.GetLength(1); e++)
+            texture = new Texture2D(resolution, resolution, TextureFormat.RGB24, true);
+            texture.name = "Procedural Texture";
+            texture.wrapMode = TextureWrapMode.Clamp;
+            texture.filterMode = FilterMode.Trilinear;
+            texture.anisoLevel = 9;
+            GetComponent<MeshRenderer>().material.mainTexture = texture;
+        }
+        FillTexture();
+    }
+
+    private void Update()
+    {
+        if (transform.hasChanged)
+        {
+            transform.hasChanged = false;
+            FillTexture();
+        }
+    }
+
+    public void FillTexture()
+    {
+        if (texture.width != resolution)
+        {
+            texture.Resize(resolution, resolution);
+        }
+
+        Vector3 point00 = transform.TransformPoint(new Vector3(-0.5f, -0.5f));
+        Vector3 point10 = transform.TransformPoint(new Vector3(0.5f, -0.5f));
+        Vector3 point01 = transform.TransformPoint(new Vector3(-0.5f, 0.5f));
+        Vector3 point11 = transform.TransformPoint(new Vector3(0.5f, 0.5f));
+
+        NoiseMethod method = Noise.methods[(int)type][dimensions - 1];
+        float stepSize = 1f / resolution;
+        for (int y = 0; y < resolution; y++)
+        {
+            Vector3 point0 = Vector3.Lerp(point00, point01, (y + 0.5f) * stepSize);
+            Vector3 point1 = Vector3.Lerp(point10, point11, (y + 0.5f) * stepSize);
+            for (int x = 0; x < resolution; x++)
             {
-                if (blocks[i, e] != 1 || blocks[i, e] != 2 || blocks[i, e] != 3)
+                Vector3 point = Vector3.Lerp(point0, point1, (x + 0.5f) * stepSize);
+                float sample = Noise.Sum(method, point, frequency, octaves, lacunarity, persistence);
+
+                if (type != NoiseMethodType.Value)
                 {
-                    blocks[i, e] = 0;
+                    sample = sample * 0.5f + 0.5f;
                 }
+                texture.SetPixel(x, y, coloring.Evaluate(sample));
             }
-        }*/
-        return blocks;
+        }
+        texture.Apply();
     }
 }
 

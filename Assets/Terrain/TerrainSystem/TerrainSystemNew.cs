@@ -34,10 +34,12 @@ class TerrainSystemNew : MonoBehaviour
         Resources.Load("sand",      typeof(Material)) as Material,
         Resources.Load("water",     typeof(Material)) as Material,
         Resources.Load("bedrock",   typeof(Material)) as Material
-    };
+        };
         //Initialize GO Getting the Generation
         //Get the data
         assignData = FileIO.blocksA;
+        //print(assignData.Length);
+        //print(FileIO.blocksA);
     }
     private void Update()
     {
@@ -55,12 +57,13 @@ class TerrainSystemNew : MonoBehaviour
             {
                 if(listOfChunks[i] >=0 && listOfChunks[i] <= (chunkColl * chunkRow) - 1)
                 {
-                    float time = Time.realtimeSinceStartup;
+                    //float time = Time.realtimeSinceStartup;
                     GameObject temp = new GameObject(listOfChunks[i].ToString());
                     chunksList.Add(temp);
+                    //print(listOfChunks[i]);
                     temp.AddComponent<ChunkNew>().setParameters(Dispatcher(listOfChunks[i]), listOfChunks[i]);
                     chunksNumberList.Add(listOfChunks[i]);
-                    print(Time.realtimeSinceStartup - time);
+                    //print(Time.realtimeSinceStartup - time);
                 }
             }
         }
@@ -70,9 +73,28 @@ class TerrainSystemNew : MonoBehaviour
     {
         byte[] temp = new byte[520];
         //250 chunk have the cubes on -> numberofchunk + 1 * 520
-        for (int i = 0; i < 520; i++)
+        //for (int i = 0; i < 520; i++)
+        //{
+        //    temp[i] = assignData[((numOfChunk ) * 520)+i];
+        //}
+        int data;
+        int chunkX = (int)Mathf.Floor(numOfChunk / chunkColl);
+        int yBase = rowSize * chunkX;
+        int xBase = (int)(collSize * (numOfChunk - (chunkX* chunkColl)));
+        int contador = 0;
+        print(numOfChunk + ": YBase" + yBase);
+        print(numOfChunk + ": XBase" + xBase);
+        print((int)((widthCubes * 0) + yBase + 0 + xBase));
+        print((int)((widthCubes * (rowSize-1)) + yBase + (collSize-1) + xBase -26));
+        for (int y = 0; y < rowSize; y++)
         {
-            temp[i] = assignData[((numOfChunk + 1) * 520)+i];
+            for (int x = 0; x < collSize; x++)
+            {
+                data = (int)((widthCubes * y) + (yBase * widthCubes) + x + xBase);
+                temp[contador] = assignData[data];
+                contador++;
+                //((numOfChunk * collSize) + x) + (y * widthCubes)
+            }
         }
         return temp;
     }

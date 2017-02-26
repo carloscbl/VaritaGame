@@ -73,7 +73,7 @@ class FileIO : MonoBehaviour
             }
         }
         */
-        byte [,] blocksB = TerrainGeneration.TrueGenTerrain();
+        byte [,] blocksB = GameObject.Find("FileIO").GetComponent<TerrainGeneration>().GenTerrainNew();
         List<byte> list = new List<byte>();
         foreach (var item in blocksB)
         {

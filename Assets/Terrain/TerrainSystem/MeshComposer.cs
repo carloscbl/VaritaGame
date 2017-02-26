@@ -85,8 +85,8 @@ class MeshComposer //: MonoBehaviour
             generatedMeshComponents.vertex.AddRange(getCubeVertex(cubePos));
             generatedMeshComponents.normals.AddRange(getCubeNormals());
             generatedMeshComponents.uvs.AddRange(getUvs());
-           //triangles.AddRange(getTriangles(listOfPositions[i]));
-            triangles.AddRange(getTriangles((generatedMeshComponents.vertex.Count/24)-1));
+            //triangles.AddRange(getTriangles((generatedMeshComponents.vertex.Count/24)-1));
+            triangles.AddRange(getTriangles((generatedMeshComponents.vertex.Count/20)-1));
         }
         //generatedMeshComponents.vertex.AddRange(vertex);
         //generatedMeshComponents.normals.AddRange(normals);
@@ -137,7 +137,7 @@ class MeshComposer //: MonoBehaviour
     vertexList[7],vertexList[4],vertexList[0],vertexList[3],
  
 	// Front
-    vertexList[4],vertexList[5],vertexList[1],vertexList[0],
+    //vertexList[4],vertexList[5],vertexList[1],vertexList[0],
  
 	// Back
     vertexList[6],vertexList[7],vertexList[3],vertexList[2],
@@ -170,9 +170,9 @@ class MeshComposer //: MonoBehaviour
  
 	// Left
 	left, left, left, left,
- 
-	// Front
-	front, front, front, front,
+
+    // Front
+    //front, front, front, front,
  
 	// Back
 	back, back, back, back,
@@ -203,11 +203,11 @@ class MeshComposer //: MonoBehaviour
 	    _11, _01, _00, _10,
  
 	    // Front
-	    _11, _01, _00, _10,
- 
+	    //_11, _01, _00, _10,
+
 	    // Back
 	    _11, _01, _00, _10,
- 
+
 	    // Right
 	    _11, _01, _00, _10,
  
@@ -221,7 +221,57 @@ class MeshComposer //: MonoBehaviour
     {
         #region Triangles
         //cubeCount +=1;
+        //cubeCount = (cubeCount * 24);
+        cubeCount = (cubeCount * 20);
+
+        int[] triangles = new int[]
+        {
+        
+	// Bottom
+	3+cubeCount, 1+cubeCount, 0+cubeCount,
+    3+cubeCount, 2+cubeCount, 1+cubeCount,			
+ 
+	// Left
+	(7)+cubeCount, (5)+cubeCount, (4)+cubeCount,
+    (7)+cubeCount, (6)+cubeCount, (5)+cubeCount,
+ 
+	//// Front
+	//(3 + 4 * 2)+cubeCount, (1 + 4 * 2)+cubeCount, (0 + 4 * 2)+cubeCount,
+ //   (3 + 4 * 2)+cubeCount, (2 + 4 * 2)+cubeCount, (1 + 4 * 2)+cubeCount,
+ /*
+	// Back
+	(15)+cubeCount, (13)+cubeCount, (12)+cubeCount,
+    (15)+cubeCount, (14)+cubeCount, (13)+cubeCount,
+
+	// Right
+	(19)+cubeCount, (17)+cubeCount, (16)+cubeCount,
+    (19)+cubeCount, (18)+cubeCount, (17)+cubeCount,
+ 
+	// Top
+	(23)+cubeCount, (21)+cubeCount, (20)+cubeCount,
+    (23)+cubeCount, (22)+cubeCount, (21)+cubeCount,
+    */
+    (15-4)+cubeCount, (13-4)+cubeCount, (12-4)+cubeCount,
+    (15-4)+cubeCount, (14-4)+cubeCount, (13-4)+cubeCount,
+
+	// Right
+	(19-4)+cubeCount, (17-4)+cubeCount, (16-4)+cubeCount,
+    (19-4)+cubeCount, (18-4)+cubeCount, (17-4)+cubeCount,
+ 
+	// Top
+	(23-4)+cubeCount, (21-4)+cubeCount, (20-4)+cubeCount,
+    (23-4)+cubeCount, (22-4)+cubeCount, (21-4)+cubeCount,
+        };
+        #endregion
+        return triangles;
+    }
+    /*
+    private int[] getTriangles(int cubeCount)
+    {
+        #region Triangles
+        //cubeCount +=1;
         cubeCount = (cubeCount * 24);
+
         int[] triangles = new int[]
         {
         
@@ -233,14 +283,14 @@ class MeshComposer //: MonoBehaviour
 	(3 + 4 * 1)+cubeCount, (1 + 4 * 1)+cubeCount, (0 + 4 * 1)+cubeCount,
     (3 + 4 * 1)+cubeCount, (2 + 4 * 1)+cubeCount, (1 + 4 * 1)+cubeCount,
  
-	// Front
-	(3 + 4 * 2)+cubeCount, (1 + 4 * 2)+cubeCount, (0 + 4 * 2)+cubeCount,
-    (3 + 4 * 2)+cubeCount, (2 + 4 * 2)+cubeCount, (1 + 4 * 2)+cubeCount,
- 
+	//// Front
+	//(3 + 4 * 2)+cubeCount, (1 + 4 * 2)+cubeCount, (0 + 4 * 2)+cubeCount,
+ //   (3 + 4 * 2)+cubeCount, (2 + 4 * 2)+cubeCount, (1 + 4 * 2)+cubeCount,
+
 	// Back
 	(3 + 4 * 3)+cubeCount, (1 + 4 * 3)+cubeCount, (0 + 4 * 3)+cubeCount,
     (3 + 4 * 3)+cubeCount, (2 + 4 * 3)+cubeCount, (1 + 4 * 3)+cubeCount,
- 
+
 	// Right
 	(3 + 4 * 4)+cubeCount, (1 + 4 * 4)+cubeCount, (0 + 4 * 4)+cubeCount,
     (3 + 4 * 4)+cubeCount, (2 + 4 * 4)+cubeCount, (1 + 4 * 4)+cubeCount,
@@ -251,5 +301,5 @@ class MeshComposer //: MonoBehaviour
         };
         #endregion
         return triangles;
-    }
+    }*/
 }
