@@ -82,10 +82,10 @@ class TerrainSystemNew : MonoBehaviour
         int yBase = rowSize * chunkX;
         int xBase = (int)(collSize * (numOfChunk - (chunkX* chunkColl)));
         int contador = 0;
-        print(numOfChunk + ": YBase" + yBase);
-        print(numOfChunk + ": XBase" + xBase);
-        print((int)((widthCubes * 0) + yBase + 0 + xBase));
-        print((int)((widthCubes * (rowSize-1)) + yBase + (collSize-1) + xBase -26));
+        //print(numOfChunk + ": YBase" + yBase);
+        //print(numOfChunk + ": XBase" + xBase);
+        //print((int)((widthCubes * 0) + yBase + 0 + xBase));
+        //print((int)((widthCubes * (rowSize-1)) + yBase + (collSize-1) + xBase -26));
         for (int y = 0; y < rowSize; y++)
         {
             for (int x = 0; x < collSize; x++)

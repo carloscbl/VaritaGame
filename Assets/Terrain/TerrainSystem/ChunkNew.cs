@@ -26,7 +26,7 @@ class ChunkNew : MonoBehaviour
         {
             if (StackOfChangesToRemove.Count != 0)
             {
-                float time = Time.realtimeSinceStartup;
+                //float time = Time.realtimeSinceStartup;
                 for (int i = 0; i < StackOfChangesToRemove.Count; i++)
                 {
                     this.data[StackOfChangesToRemove[i]] = 0;
@@ -35,7 +35,7 @@ class ChunkNew : MonoBehaviour
                 StackOfChangesToRemove.Clear();
                 //print("refresco");
                 refreshChunk();
-                print(Time.realtimeSinceStartup - time);
+                //print(Time.realtimeSinceStartup - time);
             }
             counterO = 0;
         }
