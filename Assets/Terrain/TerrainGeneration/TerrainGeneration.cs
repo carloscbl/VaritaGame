@@ -103,6 +103,9 @@ class TerrainGeneration : MonoBehaviour
                 if (/*sample >= 0.3f &&*/ sample <= 0.43f)
                 {
                     data[y, x] = 0;
+                }else if (sample > 0.43f && sample < 0.48f)
+                {
+                    data[y, x] = 2;
                 }
                 else
                 {

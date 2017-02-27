@@ -39,7 +39,7 @@ class OnDemandChunkSolver : MonoBehaviour
     {
         //Update the camera in case we change player or camera
         currentCamera = CharacterSystem.getMainCharacter().transform.Find("Main Camera").gameObject;
-        currentCameraPosition = currentCamera.transform.position;
+        currentCameraPosition = currentCamera.transform.position - new Vector3(0,3,0);
         tsNew.DrawChunks(DesignateChunks(currentCameraPosition));
     }
     private List<uint> DesignateChunks(Vector2 position)
@@ -78,61 +78,87 @@ class OnDemandChunkSolver : MonoBehaviour
             {
                 case posibleCases.bot:
                     chunksNumberList.Add(centralChunkNumber - 1);
+                    chunksNumberList.Add(centralChunkNumber - 2);
                     chunksNumberList.Add(centralChunkNumber + 1);
+                    chunksNumberList.Add(centralChunkNumber + 2);
                     chunksNumberList.Add(centralChunkNumber + collSize);
                     chunksNumberList.Add(centralChunkNumber + collSize - 1);
+                    chunksNumberList.Add(centralChunkNumber + collSize - 2);
                     chunksNumberList.Add(centralChunkNumber + collSize + 1);
+                    chunksNumberList.Add(centralChunkNumber + collSize + 2);
                     break;
                 case posibleCases.top:
                     chunksNumberList.Add(centralChunkNumber - 1);
+                    chunksNumberList.Add(centralChunkNumber - 2);
                     chunksNumberList.Add(centralChunkNumber + 1);
+                    chunksNumberList.Add(centralChunkNumber + 2);
                     chunksNumberList.Add(centralChunkNumber - collSize);
                     chunksNumberList.Add(centralChunkNumber - collSize - 1);
+                    chunksNumberList.Add(centralChunkNumber - collSize - 2);
                     chunksNumberList.Add(centralChunkNumber - collSize + 1);
+                    chunksNumberList.Add(centralChunkNumber - collSize + 2);
                     break;
                 case posibleCases.right:
                     chunksNumberList.Add(centralChunkNumber - 1);
                     chunksNumberList.Add(centralChunkNumber - collSize);
                     chunksNumberList.Add(centralChunkNumber + collSize);
                     chunksNumberList.Add(centralChunkNumber + collSize - 1);
+                    chunksNumberList.Add(centralChunkNumber + collSize - 2);
                     chunksNumberList.Add(centralChunkNumber - collSize - 1);
+                    chunksNumberList.Add(centralChunkNumber - collSize - 2);
                     break;
                 case posibleCases.left:
                     chunksNumberList.Add(centralChunkNumber + 1);
                     chunksNumberList.Add(centralChunkNumber - collSize);
                     chunksNumberList.Add(centralChunkNumber + collSize);
                     chunksNumberList.Add(centralChunkNumber + collSize + 1);
+                    chunksNumberList.Add(centralChunkNumber + collSize + 2);
                     chunksNumberList.Add(centralChunkNumber - collSize + 1);
+                    chunksNumberList.Add(centralChunkNumber - collSize + 2);
                     break;
                 case posibleCases.botRight:
                     chunksNumberList.Add(centralChunkNumber - 1);
+                    chunksNumberList.Add(centralChunkNumber - 2);
                     chunksNumberList.Add(centralChunkNumber + collSize);
                     chunksNumberList.Add(centralChunkNumber + collSize - 1);
+                    chunksNumberList.Add(centralChunkNumber + collSize - 2);
                     break;
                 case posibleCases.botLeft:
                     chunksNumberList.Add(centralChunkNumber + 1);
+                    chunksNumberList.Add(centralChunkNumber + 2);
                     chunksNumberList.Add(centralChunkNumber + collSize);
                     chunksNumberList.Add(centralChunkNumber + collSize + 1);
+                    chunksNumberList.Add(centralChunkNumber + collSize + 2);
                     break;
                 case posibleCases.topRight:
                     chunksNumberList.Add(centralChunkNumber - 1);
+                    chunksNumberList.Add(centralChunkNumber - 2);
                     chunksNumberList.Add(centralChunkNumber - collSize);
                     chunksNumberList.Add(centralChunkNumber - collSize - 1);
+                    chunksNumberList.Add(centralChunkNumber - collSize - 2);
                     break;
                 case posibleCases.topLeft:
                     chunksNumberList.Add(centralChunkNumber + 1);
+                    chunksNumberList.Add(centralChunkNumber + 2);
                     chunksNumberList.Add(centralChunkNumber - collSize);
                     chunksNumberList.Add(centralChunkNumber - collSize + 1);
+                    chunksNumberList.Add(centralChunkNumber - collSize + 2);
                     break;
                 case posibleCases.Zero://No borders around
                     chunksNumberList.Add(centralChunkNumber + 1);
+                    chunksNumberList.Add(centralChunkNumber + 2);
                     chunksNumberList.Add(centralChunkNumber - 1);
+                    chunksNumberList.Add(centralChunkNumber - 2);
                     chunksNumberList.Add(centralChunkNumber + collSize);
                     chunksNumberList.Add(centralChunkNumber - collSize);
                     chunksNumberList.Add(centralChunkNumber + collSize - 1);
+                    chunksNumberList.Add(centralChunkNumber + collSize - 2);
                     chunksNumberList.Add(centralChunkNumber + collSize + 1);
+                    chunksNumberList.Add(centralChunkNumber + collSize + 2);
                     chunksNumberList.Add(centralChunkNumber - collSize + 1);
+                    chunksNumberList.Add(centralChunkNumber - collSize + 2);
                     chunksNumberList.Add(centralChunkNumber - collSize - 1);
+                    chunksNumberList.Add(centralChunkNumber - collSize - 2);
                     break;
             }
             #endregion
