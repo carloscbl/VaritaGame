@@ -4490,7 +4490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1739637357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4502,6 +4502,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47599d9fe3bdf148990bf2115b15642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChunkInstantiationsThisFrame: 1
+  destroyOldChunks: 1
+  chargeWholeStack: 0
 --- !u!4 &1739637358
 Transform:
   m_ObjectHideFlags: 0
@@ -5567,13 +5570,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e7e1fc511b4d34883390c209ccaf3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resolution: 512
+  resolution: 2048
   resolutionY: 500
-  frequency: 26.49
+  frequency: 50
   octaves: 4
   lacunarity: 2.583
   persistence: 0.361
-  dimensions: 3
+  dimensions: 2
   type: 1
   coloring:
     key0:
