@@ -39,7 +39,7 @@ class OnDemandChunkSolver : MonoBehaviour
     {
         //Update the camera in case we change player or camera
         currentCamera = CharacterSystem.getMainCharacter().transform.Find("Main Camera").gameObject;
-        currentCameraPosition = currentCamera.transform.position - new Vector3(0,3,0);
+        currentCameraPosition = currentCamera.transform.position;
         tsNew.DrawChunks(DesignateChunks(currentCameraPosition));
     }
     private List<uint> DesignateChunks(Vector2 position)
@@ -48,6 +48,12 @@ class OnDemandChunkSolver : MonoBehaviour
 
         float y = Mathf.Floor(position.y / (TerrainSystemNew.rowSize * TerrainSystemNew.cubeSizeMultiplier));
         uint centralChunkNumber = (uint)((y * TerrainSystemNew.chunkColl) + Mathf.Floor(position.x / (TerrainSystemNew.collSize * TerrainSystemNew.cubeSizeMultiplier)));
+        if (centralChunkNumber > TerrainSystemNew.chunkColl * TerrainSystemNew.chunkRow)
+        {
+            y = Mathf.Floor((TerrainSystemNew.chunkRow * TerrainSystemNew.rowSize * TerrainSystemNew.cubeSizeMultiplier) /(TerrainSystemNew.rowSize * TerrainSystemNew.cubeSizeMultiplier)) -1;
+            centralChunkNumber = (uint)((y * TerrainSystemNew.chunkColl) + Mathf.Floor(position.x / (TerrainSystemNew.collSize * TerrainSystemNew.cubeSizeMultiplier)));
+            //print("hola");
+        }
         //print(centralChunkNumber);
         if (centralChunkNumber >= 0 && centralChunkNumber <= TerrainSystemNew.chunkColl * TerrainSystemNew.chunkRow)
         {
