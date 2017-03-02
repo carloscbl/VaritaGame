@@ -29,7 +29,7 @@ class GameSystem : MonoBehaviour
     {
         if (firstFrame == 0)
         {
-            transform.Find("TerrainSystem").gameObject.SetActive(true);
+            //transform.Find("TerrainSystem").gameObject.SetActive(false);
             firstFrame = 1;
         }
     }

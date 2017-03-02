@@ -10,7 +10,7 @@ class ChunkNew : MonoBehaviour
 {
     Mesh m_Mesh;
     byte[] data;
-    uint iAmNumberOfChunk;
+    public uint iAmNumberOfChunk;
     MeshFilter m_MeshFilter;
     MeshComposer meshGen;
     List<Material> materials;
@@ -40,6 +40,14 @@ class ChunkNew : MonoBehaviour
             counterO = 0;
         }
         counterO++;
+    }
+    private void OnDestroy()
+    {
+        reportMyData();
+    }
+    private void reportMyData()
+    {
+        GameObject.Find("Root").transform.Find("TerrainSystem").GetComponent<TerrainSystemNew>().ReportData(this.data, iAmNumberOfChunk);
     }
     public void setParameters(byte [] data,uint iAmNumberOfChunk )
     {
