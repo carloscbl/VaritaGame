@@ -35,7 +35,10 @@ class TerrainGeneration : MonoBehaviour
     public Gradient coloring;
 
     private Texture2D texture;
+    private void elevateGround()
+    {
 
+    }
     public byte[,] GenTerrainNew()
     {
 
@@ -48,6 +51,7 @@ class TerrainGeneration : MonoBehaviour
         Vector3 point11 = transform.TransformPoint(new Vector3(0.5f, 0.5f));
 
         NoiseMethod method = Noise.methods[(int)type][dimensions - 1];
+        NoiseMethod method2 = Noise.methods[(int)NoiseMethodType.Perlin][1-1];
         float stepSize = 1f / resolution;
         float stepSizeX = 1f / 500;
         for (int y = 0; y < resolution; y++)
@@ -58,7 +62,21 @@ class TerrainGeneration : MonoBehaviour
             {
                 if (y > 1024)
                 {
-                    data[y, x] = 0;
+                    if (y > 1024 && y < 1280)
+                    {
+                        Vector3 point = Vector3.Lerp(point0, point1, (x + 0.5f) * stepSize);
+                        float sample = Noise.Sum(method2, point, 10, octaves, lacunarity, persistence);
+                        data[y, x] = 0;
+                        /////Interpolar el resultado de la altura maxima con el sample
+                        if (sample <= 0.43f)
+                        {
+                            data[y, x] = 1;
+                        }
+                    }else
+                    {
+                        data[y, x] = 0;
+                    }
+                    
                 }else
                 {
                     Vector3 point = Vector3.Lerp(point0, point1, (x + 0.5f) * stepSize);
@@ -107,7 +125,7 @@ class TerrainGeneration : MonoBehaviour
         if (transform.hasChanged)
         {
             transform.hasChanged = false;
-            //FillTexture();
+            FillTexture();
         }
     }
 
