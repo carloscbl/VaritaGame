@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class Parallax : MonoBehaviour {
     {
         Ground,Sky,Space,UnderGround,MotherRock,Core
     }
+    int totalStages = Enum.GetValues(typeof(DeepStage)).Length;
+    float MaximumHeight = TerrainSystemNew.cubeSizeMultiplier * 2048;
     GameObject Player;
     public DeepStage currentDeepStage;
 	// Use this for initialization
@@ -20,7 +23,7 @@ public class Parallax : MonoBehaviour {
         OriginalPosition = this.transform.position;
         lastY = GameObject.Find("CharacterSystem").GetComponent<CharacterSystem>().mainCharacter.transform.position.y;
         lastX = GameObject.Find("CharacterSystem").GetComponent<CharacterSystem>().mainCharacter.transform.position.x;
-        checkStage();
+        //checkStage();
     }
     
     public Vector2 Max = new Vector2(150,150);
@@ -48,26 +51,28 @@ public class Parallax : MonoBehaviour {
     }
     void checkStage()
     {
+        float y = MaximumHeight / totalStages;
+        print(MaximumHeight + ":" + totalStages);
         DeepStage tempStage;
-        if (Player.transform.position.y <           30)
+        if (Player.transform.position.y < y * 1)
         {
             tempStage = DeepStage.Core;
-        }else if(Player.transform.position.y <      150)
+        }else if(Player.transform.position.y < y * 2)
         {
             tempStage = DeepStage.MotherRock;
-        }else if (Player.transform.position.y <     290)
+        }else if (Player.transform.position.y < y * 3)
         {
             tempStage = DeepStage.UnderGround;
         }
-        else if (Player.transform.position.y <      330)
+        else if (Player.transform.position.y < y * 4)
         {
             tempStage = DeepStage.Ground;
         }
-        else if (Player.transform.position.y <      400)
+        else if (Player.transform.position.y < (y * 5) - y/2)
         {
             tempStage = DeepStage.Sky;
         }
-        else if (Player.transform.position.y <      500)
+        else if (Player.transform.position.y < (y * 6) - y/2)
         {
             tempStage = DeepStage.Space;
         }else
@@ -125,13 +130,16 @@ public class Parallax : MonoBehaviour {
                         matGen = Resources.Load<Material>("Art/Textures/BackGrounds/Materials/TrigoGround");
                         break;
                     case DeepStage.Sky:
+                        //matGen = null;
                         break;
                     case DeepStage.Space:
+                        //matGen = null;
                         break;
                     case DeepStage.UnderGround:
                         matGen = Resources.Load<Material>("Art/Textures/BackGrounds/Materials/UnderGround 1");
                         break;
                     case DeepStage.MotherRock:
+                        //matGen = null;
                         break;
                     case DeepStage.Core:
                         matGen = Resources.Load<Material>("Art/Textures/BackGrounds/Materials/pillar");

@@ -80,6 +80,7 @@ class OnDemandChunkSolver : MonoBehaviour
             }
             uint collSize = TerrainSystemNew.chunkColl;
             #region switchCases
+            int offset = TerrainSystemNew.offset;
             switch (Case)
             {
                 case posibleCases.bot:
@@ -151,6 +152,24 @@ class OnDemandChunkSolver : MonoBehaviour
                     chunksNumberList.Add(centralChunkNumber - collSize + 2);
                     break;
                 case posibleCases.Zero://No borders around
+
+                    List<uint> list = new List<uint>();
+                    for (int i = (-offset); i <= offset; i++)
+                    {
+                        chunksNumberList.Add(centralChunkNumber + (uint)i);
+                    }
+                    for (int e = 0; e < chunksNumberList.Count; e++)
+                    {
+                        //print(chunksNumberList[e]);
+                        for (int i = 0; i < offset; i++)
+                        {
+                            list.Add(chunksNumberList[e] + (uint)(collSize * (i+1)));
+                            list.Add(chunksNumberList[e] - (uint)(collSize * (i+1)));
+                        }
+                    }
+                    chunksNumberList.AddRange(list);
+
+                    /*
                     chunksNumberList.Add(centralChunkNumber + 1);
                     chunksNumberList.Add(centralChunkNumber + 2);
                     chunksNumberList.Add(centralChunkNumber - 1);
@@ -165,6 +184,7 @@ class OnDemandChunkSolver : MonoBehaviour
                     chunksNumberList.Add(centralChunkNumber - collSize + 2);
                     chunksNumberList.Add(centralChunkNumber - collSize - 1);
                     chunksNumberList.Add(centralChunkNumber - collSize - 2);
+                    */
                     break;
             }
             #endregion

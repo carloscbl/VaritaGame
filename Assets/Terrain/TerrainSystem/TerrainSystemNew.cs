@@ -20,11 +20,13 @@ class TerrainSystemNew : MonoBehaviour
     public static readonly ushort collSize = 26;
     public static readonly uint totalCubesInChunk = (uint)(rowSize * collSize);
     public static readonly float cubeSizeMultiplier = .25f;
+    public static int offset = 3;
     public static Material[] mat;
 
     List<GameObject> chunksList = new List<GameObject>();
     List<uint> chunksNumberList = new List<uint>();
     List<Material> materialsList = new List<Material>();
+    List<uint> ObsoleteChunks = new List<uint>();
     public bool ChunkInstantiationsThisFrame = true;
     public bool destroyOldChunks = false;
     public bool chargeWholeStack = false;
@@ -59,27 +61,47 @@ class TerrainSystemNew : MonoBehaviour
         }
         
     }
+    int count = 0;
     private void Update()
     {
-        if (!ChunkInstantiationsThisFrame && destroyOldChunks)
+        if (!ChunkInstantiationsThisFrame && destroyOldChunks && count >= 20)
         {
             removeOldChunks();
-        }        
+            count = 0;
+        }
+        count++;
     }
     private void removeOldChunks()
     {
-        while(chunksList.Count > 12 / cubeSizeMultiplier)
+        int off = (((offset * 2) + 1) * offset * 2) +12;
+        //print(off);
+        //print(chunksList.Count);
+        //print(ObsoleteChunks.Count);
+        //print("----");
+        //List<GameObject> toRemove = chunksList.All(p => p.GetComponent<ChunkNew>().iAmNumberOfChunk == );
+        while (chunksList.Count > (off * 2))
         {
             GameObject temp = chunksList[0];
-            
+
             chunksNumberList.Remove(chunksList[0].GetComponent<ChunkNew>().iAmNumberOfChunk);
             chunksList.RemoveAt(0);
 
             DestroyImmediate(temp, true);
         }
+
+
+        //GameObject temp;
+        //    for (int e = 0; e < ObsoleteChunks.Count; e++)
+        //    {
+        //        temp = chunksList.Find(p => p.GetComponent<ChunkNew>().iAmNumberOfChunk == ObsoleteChunks[e]);
+        //        chunksNumberList.Remove(temp.GetComponent<ChunkNew>().iAmNumberOfChunk);
+        //        chunksList.Remove(temp);
+        //        DestroyImmediate(temp, true);
+        //    }
     }
     public void DrawChunks(List<uint> listOfChunks)
     {
+        ObsoleteChunks.Clear();
         for (int i = 0; i < listOfChunks.Count; i++)
         {
             if (chunksNumberList.All(item => item != listOfChunks[i]))
@@ -92,6 +114,7 @@ class TerrainSystemNew : MonoBehaviour
                     //print(listOfChunks[i]);
                     temp.AddComponent<ChunkNew>().setParameters(Dispatcher(listOfChunks[i]), listOfChunks[i]);
                     chunksNumberList.Add(listOfChunks[i]);
+                    //ObsoleteChunks.Add(chunksNumberList.Find(item => item != listOfChunks[i]));
                     //print(Time.realtimeSinceStartup - time);
                 }
                 ChunkInstantiationsThisFrame = true;
