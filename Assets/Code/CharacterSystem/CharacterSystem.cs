@@ -33,6 +33,8 @@ public class CharacterSystem : MonoBehaviour {
     }
     public void instantiateNewPlayer(string name)
     {
+        
+
         GameObject newPlayer = Instantiate(Resources.Load("CharacterBase")) as GameObject;
 
         if (name == "Arwin")

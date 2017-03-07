@@ -1,10 +1,25 @@
 fileFormatVersion: 2
 guid: df06556b0a860ca449505fd9bbea4efc
-timeCreated: 1482245472
+timeCreated: 1486509475
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - myGameObject: {instanceID: 0}
+  - body_main: {instanceID: 0}
+  - TopSkin: {instanceID: 0}
+  - LegsSkin: {instanceID: 0}
+  - ArmRight: {instanceID: 0}
+  - WeaponRight: {instanceID: 0}
+  - ArmRightSkin: {instanceID: 0}
+  - HatSkin: {instanceID: 0}
+  - ArmLeft: {instanceID: 0}
+  - WeaponLeft: {instanceID: 0}
+  - ArmLeftSkin: {instanceID: 0}
+  - ShoesSkin: {instanceID: 0}
+  - myCamera: {instanceID: 0}
+  - mallaA_star: {fileID: 1652077035550560, guid: ac5e3b6525561c14ab0337310a753b28,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
