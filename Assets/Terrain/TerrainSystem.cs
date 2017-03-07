@@ -68,7 +68,7 @@ public class TerrainSystem : MonoBehaviour
         {
             if (aa[i] != -2)
             {
-                ChunkOnScreen.Add(aa[i]);                    
+                ChunkOnScreen.Add(aa[i]);
             }
         }
         //ahora hay que evitar la reduplicacion :/
@@ -93,6 +93,7 @@ public class TerrainSystem : MonoBehaviour
                     if (!repeat)
                     {
                         chunk = new Chunk(chunksStructs[ChunkOnScreen[e]]);
+                        chunk.excluirDePathFinding(); //Para quitarlo de la malla del pathfinding
                         screenGenerated.Add(chunk);
                         GlobalChunkList.Add(chunk);
                     }

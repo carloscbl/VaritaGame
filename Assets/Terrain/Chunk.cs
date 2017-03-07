@@ -141,8 +141,7 @@ public class Chunk
         worldPos = myDataChunk.worldPos;
         myChunkID = myDataChunk.localChunkId;
         chunkCubes = myDataChunk.cubes;
-        
-        
+
         float first = Time.realtimeSinceStartup;
         //List<int> Materiales = new List<int>();
         List<int> Materiales;
@@ -353,6 +352,13 @@ public class Chunk
             temp.Add(TerrainSystem.MaterialsList[Mat]);
         }
         return temp.ToArray();
+    }
+    
+    //dss: Añadir el chunk a la capa obstacle y reescanear
+    public void excluirDePathFinding()
+    {
+        gameObject.layer = 8; 
+        AstarPath.active.Scan(); 
     }
 }
 
