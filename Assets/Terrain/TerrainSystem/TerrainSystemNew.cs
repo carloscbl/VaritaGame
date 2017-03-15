@@ -112,6 +112,7 @@ class TerrainSystemNew : MonoBehaviour
                     GameObject temp = new GameObject(listOfChunks[i].ToString());
                     chunksList.Add(temp);
                     //print(listOfChunks[i]);
+                    temp.layer = LayerMask.NameToLayer("Obstacle");
                     temp.AddComponent<ChunkNew>().setParameters(Dispatcher(listOfChunks[i]), listOfChunks[i]);
                     chunksNumberList.Add(listOfChunks[i]);
                     //ObsoleteChunks.Add(chunksNumberList.Find(item => item != listOfChunks[i]));

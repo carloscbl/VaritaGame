@@ -21,7 +21,7 @@ public class ControlDelPath : MonoBehaviour {
             //¿Iria en CharacterSystem.cs?
             //Creamos el AstarPath
             Debug.Log("ControlDelPath:Creando el A_star a mano.");
-            GameObject newA_star = Instantiate(Resources.Load("PathFinding/A_star")) as GameObject;
+            GameObject newA_star = Instantiate(Resources.Load("A_star")) as GameObject;
             newA_star.transform.position = new Vector3(0, 0, 0);
             newA_star.transform.SetParent(this.transform);
 
@@ -45,7 +45,7 @@ public class ControlDelPath : MonoBehaviour {
             //float y = 0;
             float y = 320;
             
-            Transform enemigo = (Transform)Instantiate((Object)GameObject.Find("EnemyTest2_3D_volador"), new Vector3(x, y, 0),Quaternion.identity);
+            //Transform enemigo = (Transform)Instantiate((Object)GameObject.Find("EnemyTest2_3D_volador"), new Vector3(x, y, 0),Quaternion.identity);
             
             
         }
