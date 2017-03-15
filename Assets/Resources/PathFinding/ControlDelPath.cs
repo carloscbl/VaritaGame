@@ -21,8 +21,9 @@ public class ControlDelPath : MonoBehaviour {
             //¿Iria en CharacterSystem.cs?
             //Creamos el AstarPath
             Debug.Log("ControlDelPath:Creando el A_star a mano.");
-            GameObject newA_star = Instantiate(Resources.Load("A_star")) as GameObject;
-            newA_star.transform.position = new Vector3(25, 300, 0);
+            GameObject newA_star = Instantiate(Resources.Load("PathFinding/A_star")) as GameObject;
+            newA_star.transform.position = new Vector3(0, 0, 0);
+            newA_star.transform.SetParent(this.transform);
 
             //Esto en el AstarPath.cs ->GraphUpdateObject guo = new graphupdateobject(mybounds);
             //TODO: En Chunk.cs anyado la capa obstacle cuando se crea el objeto para que se excluya
