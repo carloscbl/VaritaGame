@@ -52,7 +52,7 @@ public class Parallax : MonoBehaviour {
     void checkStage()
     {
         float y = MaximumHeight / totalStages;
-        print(MaximumHeight + ":" + totalStages);
+        //print(MaximumHeight + ":" + totalStages);
         DeepStage tempStage;
         if (Player.transform.position.y < y * 1)
         {
