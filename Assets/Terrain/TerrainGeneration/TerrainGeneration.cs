@@ -18,10 +18,10 @@ class TerrainGeneration : MonoBehaviour
 
     }
     //[Range(2, 512)]
-    int resolution = 1024;//(int)TerrainSystemNew.widthCubes;
-    int halfRes = 512;
-    int octaveResPlusRes = 512 + 128;
-
+    int resolution = 1024* incrementFactor;//(int)TerrainSystemNew.widthCubes;
+    int halfRes = 512* incrementFactor;
+    int octaveResPlusRes = (512* incrementFactor + 128* incrementFactor);
+    static int incrementFactor = 2;
     public float frequency = 23.4f;
 
     [Range(1, 8)]
@@ -77,9 +77,9 @@ class TerrainGeneration : MonoBehaviour
                     if (y > halfRes && y < octaveResPlusRes)
                     {
                         Vector3 point = Vector3.Lerp(point0, point1, (x + 0.5f) * stepSize);
-                        //float sample = Noise.Sum(method2, point, 4, octaves, lacunarity, persistence);
-                        float sample = Noise.Sum(method2, point, 50, 0, 0, 0);
-                        float maxAltitude = getMidPoint(halfRes+64, octaveResPlusRes, sample);
+                        float sample = Noise.Sum(method2, point, 4, octaves, lacunarity, persistence);
+                        //float sample = Noise.Sum(method2, point, 50, 0, 0, 0);
+                        float maxAltitude = getMidPoint(halfRes+ (64 * incrementFactor), octaveResPlusRes, sample);
                         //Determinar la altura maxima y solo poner 1 si esta por debajo
                         /////Interpolar el resultado de la altura maxima con el sample
                         if (y < maxAltitude)
@@ -94,7 +94,7 @@ class TerrainGeneration : MonoBehaviour
                     {
                         data[y, x] = 0;
                     }
-                    
+
                 }else
                 {
                     Vector3 point = Vector3.Lerp(point0, point1, (x + 0.5f) * stepSize);
@@ -117,7 +117,7 @@ class TerrainGeneration : MonoBehaviour
                         data[y, x] = 1;
                     }
                 }
-                
+
             }
         }
         print(Time.realtimeSinceStartup - time);

@@ -11,10 +11,10 @@ public class ControlDelPath : MonoBehaviour {
 	void Start () {
 		
 	}
-	
+    int counter = 0;
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown("0"))//Creamos la malla del A*
+        if (counter == 0)//Creamos la malla del A*
         {
             Debug.Log("Creando el Astar");
 
@@ -27,9 +27,9 @@ public class ControlDelPath : MonoBehaviour {
 
             //Esto en el AstarPath.cs ->GraphUpdateObject guo = new graphupdateobject(mybounds);
             //TODO: En Chunk.cs anyado la capa obstacle cuando se crea el objeto para que se excluya
-                  //del pathfinding.
-            
+            //del pathfinding.
 
+            counter++;
 
         }
         if (Input.GetKeyDown("9"))//Clonar enemigo

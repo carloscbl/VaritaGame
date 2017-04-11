@@ -29,25 +29,20 @@ public class EnemyPathfinding3D : MonoBehaviour {
     public float nextWaypointDistance = 3;
     //The Waypoint we are currently moving towards
     private int currentWaypoint = 0;
-
-
-
-	// Use this for initialization
-	void Start () {
-        Debug.Log("Starting pathfinding!");
-        target = GameObject.Find("Arwin").transform;
-        seeker = GetComponent<Seeker>();
-        rb = GetComponent<Rigidbody>();
-        
-        if(target == null)
+    private void Update()
+    {
+        if (rb.velocity.sqrMagnitude > 10)
         {
-            Debug.LogError("No target found!");
-            return;
+            //smoothness of the slowdown is controlled by the 0.99f, 
+            //0.5f is less smooth, 0.9999f is more smooth
+            rb.velocity *= 0.5f;
         }
-        //Start a new path to the target position, return the result to the OnPathComplete method
-        seeker.StartPath(transform.position, target.position,OnPathComplete);
+    }
 
-        StartCoroutine(UpdatePath());
+
+    // Use this for initialization
+    void Start () {
+        
 	}
 	
     IEnumerator UpdatePath()
@@ -74,9 +69,27 @@ public class EnemyPathfinding3D : MonoBehaviour {
             currentWaypoint = 0;
         }
     }
-
+    int counter = 0;
     void FixedUpdate()
     {
+        if (counter == 0)
+        {
+            Debug.Log("Starting pathfinding!");
+            target = GameObject.Find("Arwin").transform;
+            seeker = GetComponent<Seeker>();
+            rb = GetComponent<Rigidbody>();
+
+            if (target == null)
+            {
+                Debug.LogError("No target found!");
+                return;
+            }
+            //Start a new path to the target position, return the result to the OnPathComplete method
+            seeker.StartPath(transform.position, target.position, OnPathComplete);
+
+            StartCoroutine(UpdatePath());
+            counter++;
+        }
         if (target == null)
         {
             //TODO: Insert a player search here.

@@ -15,6 +15,7 @@ class GameSystem : MonoBehaviour
 
     public GameObject TerrainSystem;
     public GameObject CharacterSystem;
+    public GameObject FileIO;
     public GameObject ProjectileSystem;
     private GameStatus gameStatus = GameStatus.StartMenu;
 
@@ -23,6 +24,7 @@ class GameSystem : MonoBehaviour
         initializeProjectileSystem();
         //print("holaGamesistem");
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Projectile"), LayerMask.NameToLayer("Player"));
+        FileIO = GameObject.Find("Root").transform.Find("FileIO").gameObject;
     }
     byte firstFrame = 0;
     private void Update()
@@ -53,6 +55,7 @@ class GameSystem : MonoBehaviour
     {
         gameStatus = GameStatus.Running;
         CharacterSystem.GetComponent<CharacterSystem>().instantiateNewPlayer(nameCharacter);
+        FileIO.SetActive(true);
         TerrainSystem.SetActive(true);
     }
 
