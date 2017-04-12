@@ -19,7 +19,7 @@ public class CharacterSystem : MonoBehaviour {
     // Use this for initialization
     private void Awake()
     {
-        instantiateNewPlayer("Arwin");
+        //instantiateNewPlayer("Arwin");
     }
     void Start ()
     {

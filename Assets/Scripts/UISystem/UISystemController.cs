@@ -59,12 +59,12 @@ class UISystemController : MonoBehaviour
     {
         MainMenu.SetActive(false);
         StartGameMenu.SetActive(false);
-        LoadingUI.SetActive(true);
+        //LoadingUI.SetActive(true);
         InGameUI.GetComponent<UISpells>().SetSpells(new List<Spell>() { new Spell("Attact1", 100, 0), new Spell("Attact2", 100, 0), new Spell("Attact3", 100, 0), new Spell("Attact4", 100, 0) });//TODO: change this
         InGameUI.SetActive(true);
         
         GameObject.Find("Root").GetComponent<GameSystem>().CreateWorld(name);
-        LoadingUI.SetActive(false);
+        //LoadingUI.SetActive(false);
     }
 
     public void ActivateMainMenu()
