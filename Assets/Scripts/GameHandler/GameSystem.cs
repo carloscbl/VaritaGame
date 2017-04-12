@@ -17,6 +17,8 @@ class GameSystem : MonoBehaviour
     public GameObject CharacterSystem;
     public GameObject FileIO;
     public GameObject ProjectileSystem;
+    public GameObject EnemySystem;
+    public GameObject LoadingUI;
     private GameStatus gameStatus = GameStatus.StartMenu;
 
     private void Start()
@@ -53,10 +55,15 @@ class GameSystem : MonoBehaviour
 
     public void CreateWorld(string nameCharacter)
     {
+
         gameStatus = GameStatus.Running;
+
+        LoadingUI.SetActive(true);
         CharacterSystem.GetComponent<CharacterSystem>().instantiateNewPlayer(nameCharacter);
         FileIO.SetActive(true);
         TerrainSystem.SetActive(true);
+        EnemySystem.SetActive(true);
+        LoadingUI.SetActive(false);
     }
 
     public void PauseGame()
