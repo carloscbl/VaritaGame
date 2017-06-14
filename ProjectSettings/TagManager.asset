@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Collider
+  - Projectiles
+  - NPCEnemy
+  - Enemy
+  - Living
+  - Destructibles
   layers:
   - Default
   - TransparentFX
@@ -14,9 +19,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Player
+  - Projectile
+  - Obstacle
   - 
   - 
   - 
